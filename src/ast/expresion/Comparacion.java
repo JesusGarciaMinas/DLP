@@ -8,6 +8,6 @@ public class Comparacion extends ExpresionBinaria {
 
 	@Override
 	public String toString() {
-		return "Comparacion [toString()=" + super.toString() + "]";
+		return "Comparacion [=" + super.toString() + "]";
 	}
 }

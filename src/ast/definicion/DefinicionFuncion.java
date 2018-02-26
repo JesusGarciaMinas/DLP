@@ -44,4 +44,10 @@ public class DefinicionFuncion extends AbstractNodoAST implements Definicion {
 	private void setCuerpo(List<Sentencia> cuerpo) {
 		this.cuerpo = new ArrayList<Sentencia>(cuerpo);
 	}
+
+	@Override
+	public String toString() {
+		return "DefinicionFuncion [tipoFuncion=" + tipoFuncion + ", nombreFuncion=" + nombreFuncion + ", cuerpo="
+				+ cuerpo + "]";
+	}
 }

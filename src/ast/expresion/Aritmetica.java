@@ -8,6 +8,6 @@ public class Aritmetica extends ExpresionBinaria {
 
 	@Override
 	public String toString() {
-		return "Aritmetica [toString()=" + super.toString() + "]";
+		return "Aritmetica [" + super.toString() + "]";
 	}
 }

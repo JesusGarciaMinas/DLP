@@ -21,4 +21,9 @@ public class Programa extends AbstractNodoAST {
 	public void setDefiniciones(List<Definicion> definiciones) {
 		this.definiciones = definiciones;
 	}
+
+	@Override
+	public String toString() {
+		return "Programa [definiciones=" + definiciones + "]";
+	}
 }

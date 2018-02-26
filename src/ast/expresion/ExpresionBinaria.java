@@ -40,6 +40,6 @@ public abstract class ExpresionBinaria extends AbstractNodoAST implements Expres
 
 	@Override
 	public String toString() {
-		return "ExpresionBinaria [expLeft=" + expLeft + ", expRight=" + expRight + ", operador=" + operador + "]";
+		return "ExpresionBinaria [expLeft=" + expLeft + ", operador=" + operador + ", expRight=" + expRight + "]";
 	}
 }

@@ -1,6 +1,6 @@
 package ast.nodo;
 
-public class AbstractNodoAST implements NodoAST{
+public class AbstractNodoAST implements NodoAST {
 	private int linea;
 	private int columna;
 
