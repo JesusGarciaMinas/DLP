@@ -44,5 +44,3 @@ Las expresiones están formadas por:
 > >= < <= != ==		A Izquierdas
 		&& || 		A Izquierdas
 		=			A derechas
-		
-		sentencia_if: RES_IF expresion LLA_AB lista_sentencias LLA_CE

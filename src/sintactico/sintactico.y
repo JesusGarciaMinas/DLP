@@ -120,7 +120,11 @@ defvar: RES_VAR lvar tipo SIM_PC; 	{
 
 lvar: lvar SIM_CO IDENT		{
 								List<Variable> lista = (List<Variable>) $1;
-								lista.add(new Variable (l(), c(), (String) $3));
+								Variable var = new Variable (l(), c(), (String) $3);
+								if (lista.contains(var))
+									new TipoError(l(), c(), "Nombre de variable duplicada");
+								else
+									lista.add(var);
 								$$ = lista;
 							}
 	| IDENT					{
@@ -130,7 +134,7 @@ lvar: lvar SIM_CO IDENT		{
 							}
 	;
 
-funcion: RES_FUNC IDENT PAR_AB parametrosopc PAR_CE tipo LLA_AB cuerpofuncion LLA_CE 	{
+funcion: RES_FUNC IDENT PAR_AB parametrosopc PAR_CE tiposimple LLA_AB cuerpofuncion LLA_CE 	{
 																							$$ = new DefinicionFuncion(l(), c(), 
 																							new TipoFuncion(l(), c(), (Tipo) $6, (List<DefVariable>) $4), 
 																							(String) $2, (List<Sentencia>) $8);
@@ -164,18 +168,26 @@ parametros: parametros SIM_CO parametro		{
 						  					}
 		  ;
 
-parametro: IDENT tipo;		{ $$ = new DefVariable(l(), c(), (String)$1, (Tipo)$2); }
+parametro: IDENT tiposimple;		{ $$ = new DefVariable(l(), c(), (String)$1, (Tipo)$2); }
 
-tipo: RES_INT								{ $$ = new TipoEntero(l(), c()); }
-	| RES_F32								{ $$ = new TipoFloat32(l(), c()); }
-	| RES_CHAR								{ $$ = new TipoChar(l(), c()); }
+tipo: tiposimple							{ $$ = $1; }
 	| COR_AB CTE_ENTERA COR_CE tipo			{ $$ = new TipoArray(l(), c(), (int)$2, (Tipo) $4); }
 	| RES_STRUCT LLA_AB campos LLA_CE		{ $$ = new TipoStruct(l(), c(), (List<Campo>)$3); }
+	;
+
+tiposimple: RES_INT								{ $$ = new TipoEntero(l(), c()); }
+		  | RES_F32								{ $$ = new TipoFloat32(l(), c()); }
+	      | RES_CHAR							{ $$ = new TipoChar(l(), c()); }
 	;
 	
 campos: campos campo		{
 								List<Campo> lista = (List<Campo>)$1;
-								lista.addAll((List<Campo>)$2);
+								List<Campo> templista = (List<Campo>)$2;
+								for (Campo c: templista) 
+									if (lista.contains(c))
+										new TipoError(l(), c(), "El campo está duplicado");
+									else
+										lista.add(c);
 								$$ = lista;
 							}
 	  | campo				{ $$ = $1; }
@@ -261,7 +273,7 @@ expresion: expresion OP_MAS expresion			{ $$ = new Aritmetica(l(), c(), (Expresi
 		 | IDENT								{ $$ = new Variable(l(), c(), (String) $1); }
          | CTE_ENTERA							{ $$ = new LiteralEntero(l(), c(), (int) $1); }
          | CTE_DECIMAL							{ $$ = new LiteralDecimal(l(), c(), (float) $1); }
-         | CHAR									{ $$ = new LiteralChar(l(), c(), ((String) $1).charAt(0)); }
+         | CHAR									{ $$ = new LiteralChar(l(), c(), ((String) $1)); }
          | IDENT PAR_AB expresiones PAR_CE		{ $$ = new InvocacionFuncion(l(), c(), new Variable(l(), c(), (String) $1), (List<Expresion>) $3); }
          | IDENT PAR_AB PAR_CE					{ $$ = new InvocacionFuncion(l(), c(), new Variable(l(), c(), (String) $1), new ArrayList<Expresion>()); }
          | tipo PAR_AB expresion PAR_CE			{ $$ = new Cast(l(), c(), (Tipo)$1, (Expresion) $3); }

@@ -50,7 +50,7 @@ ReservadaReturn = "return"
 ReservadaFunc = "func"
 ReservadaMain = "main"
 ReservadaVoid = "void"
-ConstanteDecimalExp = [0-9]+"."[0-9]*"E"[-]?[0-9]+
+ConstanteDecimalExp = [0-9]+"."[0-9]*[eE][+-]?[0-9]+ | [0-9]+[eE][+-]?[0-9]+
 ConstanteEntera = [0-9]*
 ConstanteDecimal = [0-9]+"."[0-9]*
 SimboloPunto = "."
@@ -79,7 +79,7 @@ CorcheteAbierto = "["
 CorcheteCerrado = "]"
 Char = '.' | '\\n' | '\\t' | '\\[0-9]+'
 ComMulti = "/*"~"*/"
-ComUni = "//"~"\n"
+ComUni = "//".*
 Blancos = [\ \n\r\t\f]
 Identificador = [a-zA-Z_ñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]*
 
@@ -256,4 +256,4 @@ Identificador = [a-zA-Z_ñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]*
 {ComMulti} | {ComUni} | {Blancos}	{ }
 
 // * Error
-. { System.err.println("Error " + this.yyline + ":" + this.yycolumn + " Lexema = " + yytext());}
+. { System.err.println("Error " + (this.yyline+1) + ":" + (this.yycolumn+1) + " Lexema = " + yytext());}

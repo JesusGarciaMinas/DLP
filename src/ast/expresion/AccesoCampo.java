@@ -7,7 +7,7 @@ public class AccesoCampo extends AbstractNodoAST implements Expresion {
 	private Expresion expresion;
 	private String nombre;
 
-	public AccesoCampo(int linea, int columna, Expresion expresion, String Nombre) {
+	public AccesoCampo(int linea, int columna, Expresion expresion, String nombre) {
 		super(linea, columna);
 		setExpresion(expresion);
 		setNombre(nombre);

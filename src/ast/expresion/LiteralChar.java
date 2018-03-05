@@ -4,18 +4,18 @@ import ast.nodo.AbstractNodoAST;
 
 public class LiteralChar extends AbstractNodoAST implements Expresion {
 
-	private char valor;
+	private String valor;
 
-	public LiteralChar(int linea, int columna, char valor) {
+	public LiteralChar(int linea, int columna, String valor) {
 		super(linea, columna);
 		setValor(valor);
 	}
 
-	public char getValor() {
+	public String getValor() {
 		return valor;
 	}
 
-	public void setValor(char valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
 

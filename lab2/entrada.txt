@@ -8,7 +8,6 @@ var i,j int;
 func f(a int) int {
     return a;
 }
-
 // Función Principal
 func main() {
     var i,b int;
