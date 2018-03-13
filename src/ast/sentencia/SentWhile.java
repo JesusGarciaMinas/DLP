@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.expresion.Expresion;
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class SentWhile extends AbstractNodoAST implements Sentencia {
 
@@ -36,5 +37,10 @@ public class SentWhile extends AbstractNodoAST implements Sentencia {
 	@Override
 	public String toString() {
 		return "SentWhile [condicion=" + condicion + ", sentWhile=" + sentWhile + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

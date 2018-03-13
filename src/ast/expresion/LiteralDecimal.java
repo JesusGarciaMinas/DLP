@@ -1,8 +1,8 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
-public class LiteralDecimal extends AbstractNodoAST implements Expresion {
+public class LiteralDecimal extends AbstractExpresion implements Expresion {
 
 	private float valor;
 
@@ -22,5 +22,10 @@ public class LiteralDecimal extends AbstractNodoAST implements Expresion {
 	@Override
 	public String toString() {
 		return "LiteralDecimal [valor=" + valor + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

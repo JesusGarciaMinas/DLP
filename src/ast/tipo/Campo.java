@@ -1,6 +1,7 @@
 package ast.tipo;
 
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class Campo extends AbstractNodoAST implements Tipo {
 
@@ -57,5 +58,10 @@ public class Campo extends AbstractNodoAST implements Tipo {
 		} else if (!nombreCampo.equals(other.nombreCampo))
 			return false;
 		return true;
+	}
+
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

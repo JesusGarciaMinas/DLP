@@ -1,8 +1,8 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
-public class LiteralEntero extends AbstractNodoAST implements Expresion {
+public class LiteralEntero extends AbstractExpresion implements Expresion {
 
 	private int valor;
 
@@ -22,5 +22,10 @@ public class LiteralEntero extends AbstractNodoAST implements Expresion {
 	@Override
 	public String toString() {
 		return "LiteralEntero [valor=" + valor + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

@@ -1,8 +1,6 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
-
-public abstract class ExpresionBinaria extends AbstractNodoAST implements Expresion {
+public abstract class ExpresionBinaria extends AbstractExpresion implements Expresion {
 
 	private Expresion expLeft, expRight;
 	private String operador;

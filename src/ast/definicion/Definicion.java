@@ -1,4 +1,7 @@
 package ast.definicion;
 
-public interface Definicion {
+import ast.nodo.NodoAST;
+
+public interface Definicion extends NodoAST {
+	public String getNombre();
 }

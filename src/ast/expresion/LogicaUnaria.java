@@ -1,8 +1,8 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
-public class LogicaUnaria extends AbstractNodoAST implements Expresion {
+public class LogicaUnaria extends AbstractExpresion implements Expresion {
 	
 	private Expresion expresion;
 
@@ -22,5 +22,10 @@ public class LogicaUnaria extends AbstractNodoAST implements Expresion {
 	@Override
 	public String toString() {
 		return "LogicaUnaria [expresion=" + expresion + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

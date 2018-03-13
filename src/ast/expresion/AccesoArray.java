@@ -1,8 +1,8 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
-public class AccesoArray extends AbstractNodoAST implements Expresion {
+public class AccesoArray extends AbstractExpresion implements Expresion {
 
 	private Expresion nombre, tamaño;
 
@@ -31,5 +31,10 @@ public class AccesoArray extends AbstractNodoAST implements Expresion {
 	@Override
 	public String toString() {
 		return "AccesoArray [nombre=" + nombre + ", tamaño=" + tamaño + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

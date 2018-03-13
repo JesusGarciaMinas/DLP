@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class TipoStruct extends AbstractNodoAST implements Tipo {
 
@@ -25,5 +26,10 @@ public class TipoStruct extends AbstractNodoAST implements Tipo {
 	@Override
 	public String toString() {
 		return "TipoStruct [campos=" + campos + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

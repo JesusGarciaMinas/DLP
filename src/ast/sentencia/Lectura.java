@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.expresion.Expresion;
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class Lectura extends AbstractNodoAST implements Sentencia {
 
@@ -26,5 +27,10 @@ public class Lectura extends AbstractNodoAST implements Sentencia {
 	@Override
 	public String toString() {
 		return "Lectura [expresiones=" + expresiones + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

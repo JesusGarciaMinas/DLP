@@ -862,7 +862,7 @@ break;
 case 2:
 //#line 83 "../../src/sintactico/sintactico.y"
 {
-																				yyval = new DefinicionFuncion(l(), c(), 
+																				yyval = new DefFuncion(l(), c(), 
 																				new TipoFuncion(l(), c(), new TipoVoid(l(), c()), new ArrayList<DefVariable>()), 
 																				"main", (List<Sentencia>) val_peek(1));
 																			}
@@ -936,7 +936,7 @@ break;
 case 12:
 //#line 137 "../../src/sintactico/sintactico.y"
 {
-																							yyval = new DefinicionFuncion(l(), c(), 
+																							yyval = new DefFuncion(l(), c(), 
 																							new TipoFuncion(l(), c(), (Tipo) val_peek(3), (List<DefVariable>) val_peek(5)), 
 																							(String) val_peek(7), (List<Sentencia>) val_peek(1));
 																					 	}
@@ -944,7 +944,7 @@ break;
 case 13:
 //#line 142 "../../src/sintactico/sintactico.y"
 {
-																							yyval = new DefinicionFuncion(l(), c(), 
+																							yyval = new DefFuncion(l(), c(), 
 																							new TipoFuncion(l(), c(), new TipoVoid(l(), c()), (List<DefVariable>) val_peek(4)), 
 																							(String) val_peek(6), (List<Sentencia>) val_peek(1));
 																						}

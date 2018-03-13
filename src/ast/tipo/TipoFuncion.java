@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.definicion.DefVariable;
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class TipoFuncion extends AbstractNodoAST implements Tipo {
 
@@ -36,5 +37,10 @@ public class TipoFuncion extends AbstractNodoAST implements Tipo {
 	@Override
 	public String toString() {
 		return "TipoFuncion [retorno=" + retorno + ", argumentos=" + argumentos + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

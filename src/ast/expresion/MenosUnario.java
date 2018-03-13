@@ -1,8 +1,8 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
-public class MenosUnario extends AbstractNodoAST implements Expresion {
+public class MenosUnario extends AbstractExpresion implements Expresion {
 
 	private Expresion operando;
 
@@ -22,5 +22,10 @@ public class MenosUnario extends AbstractNodoAST implements Expresion {
 	@Override
 	public String toString() {
 		return "MenosUnario [operando=" + operando + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

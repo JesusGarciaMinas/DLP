@@ -1,9 +1,11 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ast.definicion.Definicion;
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class Programa extends AbstractNodoAST {
 
@@ -19,11 +21,16 @@ public class Programa extends AbstractNodoAST {
 	}
 
 	public void setDefiniciones(List<Definicion> definiciones) {
-		this.definiciones = definiciones;
+		this.definiciones = new ArrayList<Definicion>(definiciones);
 	}
 
 	@Override
 	public String toString() {
 		return "Programa [definiciones=" + definiciones + "]";
+	}
+
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

@@ -2,6 +2,7 @@ package ast.sentencia;
 
 import ast.expresion.Expresion;
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class Asignacion extends AbstractNodoAST implements Sentencia {
 
@@ -32,5 +33,10 @@ public class Asignacion extends AbstractNodoAST implements Sentencia {
 	@Override
 	public String toString() {
 		return "Asignacion [expLeft=" + expLeft + ", expRight=" + expRight + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

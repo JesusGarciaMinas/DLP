@@ -3,11 +3,12 @@ package ast.sentencia;
 import java.util.ArrayList;
 import java.util.List;
 
+import ast.expresion.AbstractExpresion;
 import ast.expresion.Expresion;
 import ast.expresion.Variable;
-import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
-public class InvocacionFuncion extends AbstractNodoAST implements Expresion, Sentencia {
+public class InvocacionFuncion extends AbstractExpresion implements Sentencia {
 
 	private Variable nombre;
 	private List<Expresion> argumentos;
@@ -37,5 +38,10 @@ public class InvocacionFuncion extends AbstractNodoAST implements Expresion, Sen
 	@Override
 	public String toString() {
 		return "InvocacionFuncion [nombre=" + nombre + ", argumentos=" + argumentos + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

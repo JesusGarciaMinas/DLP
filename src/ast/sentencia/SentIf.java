@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.expresion.Expresion;
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class SentIf extends AbstractNodoAST implements Sentencia {
 
@@ -45,5 +46,10 @@ public class SentIf extends AbstractNodoAST implements Sentencia {
 	@Override
 	public String toString() {
 		return "SentIf [condicion=" + condicion + ", sentIf=" + sentIf + ", sentElse=" + sentElse + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

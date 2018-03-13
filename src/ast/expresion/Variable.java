@@ -1,10 +1,12 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
+import ast.definicion.Definicion;
+import visitor.Visitor;
 
-public class Variable extends AbstractNodoAST implements Expresion {
+public class Variable extends AbstractExpresion implements Expresion {
 
 	private String nombre;
+	private Definicion definicion;
 
 	public Variable(int linea, int columna, String nombre) {
 		super(linea, columna);
@@ -22,6 +24,14 @@ public class Variable extends AbstractNodoAST implements Expresion {
 	@Override
 	public String toString() {
 		return "Variable [nombre=" + nombre + "]";
+	}
+
+	public void setDefinicion(Definicion definicion) {
+		this.definicion = definicion;
+	}
+
+	public Definicion getDefinicion() {
+		return definicion;
 	}
 
 	@Override
@@ -47,5 +57,10 @@ public class Variable extends AbstractNodoAST implements Expresion {
 		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
+	}
+
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

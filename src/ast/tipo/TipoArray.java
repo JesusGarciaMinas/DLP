@@ -1,6 +1,7 @@
 package ast.tipo;
 
 import ast.nodo.AbstractNodoAST;
+import visitor.Visitor;
 
 public class TipoArray extends AbstractNodoAST implements Tipo {
 
@@ -32,5 +33,10 @@ public class TipoArray extends AbstractNodoAST implements Tipo {
 	@Override
 	public String toString() {
 		return "TipoArray [tamaño=" + tamaño + ", tipo=" + tipo + "]";
+	}
+
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }

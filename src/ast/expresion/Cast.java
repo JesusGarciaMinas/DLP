@@ -1,9 +1,9 @@
 package ast.expresion;
 
-import ast.nodo.AbstractNodoAST;
 import ast.tipo.Tipo;
+import visitor.Visitor;
 
-public class Cast extends AbstractNodoAST implements Expresion {
+public class Cast extends AbstractExpresion implements Expresion {
 
 	private Tipo tipo;
 	private Expresion expresion;
@@ -33,5 +33,10 @@ public class Cast extends AbstractNodoAST implements Expresion {
 	@Override
 	public String toString() {
 		return "Cast [tipo=" + tipo + ", expresion=" + expresion + "]";
+	}
+	
+	@Override
+	public Object accept(Visitor visitor, Object param) {
+		return visitor.visit(this, param);
 	}
 }
