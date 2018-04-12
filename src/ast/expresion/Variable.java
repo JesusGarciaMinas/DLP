@@ -3,7 +3,7 @@ package ast.expresion;
 import ast.definicion.Definicion;
 import visitor.Visitor;
 
-public class Variable extends AbstractExpresion implements Expresion {
+public class Variable extends AbstractExpresion {
 
 	private String nombre;
 	private Definicion definicion;

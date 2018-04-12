@@ -10,6 +10,7 @@ import ast.expresion.Aritmetica;
 import ast.expresion.Cast;
 import ast.expresion.Comparacion;
 import ast.expresion.Expresion;
+import ast.expresion.InvocacionFuncion;
 import ast.expresion.LiteralChar;
 import ast.expresion.LiteralDecimal;
 import ast.expresion.LiteralEntero;
@@ -19,7 +20,6 @@ import ast.expresion.MenosUnario;
 import ast.expresion.Variable;
 import ast.sentencia.Asignacion;
 import ast.sentencia.Escritura;
-import ast.sentencia.InvocacionFuncion;
 import ast.sentencia.Lectura;
 import ast.sentencia.SentIf;
 import ast.sentencia.SentReturn;
@@ -30,7 +30,7 @@ import ast.tipo.TipoArray;
 import ast.tipo.TipoChar;
 import ast.tipo.TipoEntero;
 import ast.tipo.TipoError;
-import ast.tipo.TipoFloat32;
+import ast.tipo.TipoDecimal;
 import ast.tipo.TipoFuncion;
 import ast.tipo.TipoStruct;
 import ast.tipo.TipoVoid;
@@ -191,7 +191,7 @@ public abstract class AbstractVisitor implements Visitor {
 	}
 
 	@Override
-	public Object visit(TipoFloat32 f, Object param) {
+	public Object visit(TipoDecimal f, Object param) {
 		return null;
 	}
 
@@ -217,7 +217,7 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object visit(DefFuncion f, Object param) {
-		f.getTipoFuncion().accept(this, param);
+		f.getTipo().accept(this, param);
 		for (Sentencia s: f.getCuerpo())
 			s.accept(this, param);
 		return null;

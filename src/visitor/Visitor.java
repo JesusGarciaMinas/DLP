@@ -45,7 +45,7 @@ public interface Visitor {
 	public Object visit (TipoChar c, Object param);
 	public Object visit (TipoEntero e, Object param);
 	public Object visit (TipoError e, Object param);
-	public Object visit (TipoFloat32 f, Object param);
+	public Object visit (TipoDecimal f, Object param);
 	public Object visit (TipoFuncion f, Object param);
 	public Object visit (TipoStruct s, Object param);
 	public Object visit (TipoVoid v, Object param);

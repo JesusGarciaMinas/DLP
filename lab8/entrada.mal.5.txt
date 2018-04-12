@@ -1,0 +1,9 @@
+
+var v [10]int;
+
+func main() {
+  var i int;
+  i[0]=0;      // * Error 1 i es un entero no array
+  v[3]=3.4;    // * Error 2 v es de tipo int
+  v[1][2]='a';  // * Error 3 v es un array unidimensional
+}

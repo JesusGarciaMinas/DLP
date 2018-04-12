@@ -5,29 +5,21 @@ import java.util.List;
 
 import ast.nodo.AbstractNodoAST;
 import ast.sentencia.Sentencia;
-import ast.tipo.TipoFuncion;
+import ast.tipo.Tipo;
 import visitor.Visitor;
 
 public class DefFuncion extends AbstractNodoAST implements Definicion {
 
-	private TipoFuncion tipoFuncion;
+	private Tipo tipo;
 	private String nombreFuncion;
 	private List<Sentencia> cuerpo;
+	private int localVarBytes;
 
-	public DefFuncion(int linea, int columna, TipoFuncion tipoFuncion, String nombreFuncion,
-			List<Sentencia> cuerpo) {
+	public DefFuncion(int linea, int columna, Tipo tipo, String nombreFuncion, List<Sentencia> cuerpo) {
 		super(linea, columna);
-		setTipoFuncion(tipoFuncion);
+		setTipo(tipo);
 		setNombreFuncion(nombreFuncion);
 		setCuerpo(cuerpo);
-	}
-
-	public TipoFuncion getTipoFuncion() {
-		return tipoFuncion;
-	}
-
-	private void setTipoFuncion(TipoFuncion tipoFuncion) {
-		this.tipoFuncion = tipoFuncion;
 	}
 
 	public String getNombre() {
@@ -48,12 +40,29 @@ public class DefFuncion extends AbstractNodoAST implements Definicion {
 
 	@Override
 	public String toString() {
-		return "DefinicionFuncion [tipoFuncion=" + tipoFuncion + ", nombreFuncion=" + nombreFuncion + ", cuerpo="
-				+ cuerpo + "]";
+		return "DefinicionFuncion [tipo=" + tipo + ", nombreFuncion=" + nombreFuncion + ", cuerpo=" + cuerpo + "]";
 	}
-	
+
 	@Override
 	public Object accept(Visitor visitor, Object param) {
 		return visitor.visit(this, param);
+	}
+
+	@Override
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
+	@Override
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public int getLocalVarBytes() {
+		return localVarBytes;
+	}
+	
+	public void setLocalVarBytes(int localVarBytes) {
+		this.localVarBytes = localVarBytes;
 	}
 }

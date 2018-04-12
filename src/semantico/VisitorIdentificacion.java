@@ -30,9 +30,11 @@ public class VisitorIdentificacion extends AbstractVisitor {
 	@Override
 	public Object visit(Variable v, Object param) {
 		Definicion def = ts.buscar(v.getNombre());
-		v.setDefinicion(def);
-		if (def == null)
-			new TipoError(v, "Variable " + v + " indefinida");
+		if (def == null) {
+			v.setDefinicion(new DefVariable(v.getLinea(), v.getColumna(), v.getNombre(),
+					new TipoError(v, "Variable " + v + " indefinida")));
+		} else
+			v.setDefinicion(def);
 		super.visit(v, param);
 		return null;
 	}

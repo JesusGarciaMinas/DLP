@@ -1,0 +1,21 @@
+CodeGenerator con FileWriter
+Descripcion -> Nueva clase
+Sobrecarga de tipos
+
+
+
+
+plantilla generacion de codigo (funcion de codigo) -> Cada uno tiene un visitor
+ejecutar: sentencias y definiciones -> ExecuteCGVisitor
+valor: expresiones -> ValueCGVisitor
+direccion: expresiones lvalues -> AddressCGVisitor
+
+Cuando se ejecuta un visitor si es una llamada incorrecta se lanza excepcion
+AbstractCGVisitor lanzando todo excepciones
+Ahora el main tambien pide el fichero de salida
+
+Al ExecuteVisitor se pasará el fichero de entrada y salida
+
+suffix() en tipo que devuelve i si int f si float etc
+
+supertype para saber que tipo es mas grande char return el otro, decimal return this, entero preguntar

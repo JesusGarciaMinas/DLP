@@ -1,19 +1,24 @@
 package ast.tipo;
 
-import ast.nodo.AbstractNodoAST;
 import visitor.Visitor;
 
-public class TipoVoid extends AbstractNodoAST implements Tipo {
+public class TipoVoid extends AbstractTipo {
 
-	public TipoVoid(int linea, int columna) {
+	private static TipoVoid instancia = new TipoVoid(0, 0);
+
+	private TipoVoid(int linea, int columna) {
 		super(linea, columna);
+	}
+
+	public static TipoVoid getInstancia() {
+		return instancia;
 	}
 
 	@Override
 	public String toString() {
 		return "TipoVoid";
 	}
-	
+
 	@Override
 	public Object accept(Visitor visitor, Object param) {
 		return visitor.visit(this, param);

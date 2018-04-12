@@ -12,6 +12,7 @@ import sintactico.Parser;
  * on 5/03/18 21:16 from the specification file
  * <tt>lexico/lexico.jflex</tt>
  */
+@SuppressWarnings("unused")
 public class Lexico {
 
   /** This character denotes the end of file */
@@ -261,7 +262,8 @@ public class Lexico {
   private int zzMarkedPos;
 
   /** the textposition at the last state to be included in yytext */
-  private int zzPushbackPos;
+
+private int zzPushbackPos;
 
   /** the current text position in the buffer */
   private int zzCurrentPos;

@@ -5,16 +5,18 @@ import introspector.view.IntrospectorTree;
 import java.util.List;
 import java.util.ArrayList;
 
+
 public class IntrospectorDemo {
 	public static void main(String[] args) {
 		IntrospectorModel model = new IntrospectorModel("Raíz", new NodoRaiz());
 		new IntrospectorTree("Árbol", model);
 	}
 }
-
+@SuppressWarnings("unused")
 class NodoRaiz {
 	private Nodo hijo = new Nodo("Hijo1");
 	private List<String> hijos = new ArrayList<String>();
+
 	private int hijoEntero;
 
 	NodoRaiz() {

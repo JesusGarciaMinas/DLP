@@ -1,12 +1,12 @@
 package ast.tipo;
 
-import ast.nodo.AbstractNodoAST;
 import visitor.Visitor;
 
-public class Campo extends AbstractNodoAST implements Tipo {
+public class Campo extends AbstractTipo {
 
 	private String nombreCampo;
 	private Tipo tipoCampo;
+	private int offset;
 
 	public Campo(int linea, int columna, String nombreCampo, Tipo tipoCampo) {
 		super(linea, columna);
@@ -63,5 +63,18 @@ public class Campo extends AbstractNodoAST implements Tipo {
 	@Override
 	public Object accept(Visitor visitor, Object param) {
 		return visitor.visit(this, param);
+	}
+
+	@Override
+	public int numeroDeBytes() {
+		return tipoCampo.numeroDeBytes();
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 }

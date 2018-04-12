@@ -1,0 +1,19 @@
+var i int;
+
+func f(a int) int {
+  var a float32;       // * Error 1 Mismo ambito
+  return 34.5;  // * Error 2 retorno distinto
+}
+
+func g(b int, b float32) { // * Error 3 parametro repetido
+  return 3; // * Error 4 // no deberia devolver nada
+}
+
+func g() {	// * Error 5 funcion ya definida
+}
+
+func main() {
+  f();       // * Error 6 Falta parametro
+  f(3.2);    // * Error 7 parametro de tipo entero no double
+  i=g();     // * Error 8 g no devuelve nada
+}

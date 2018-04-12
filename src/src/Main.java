@@ -4,19 +4,20 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import ast.nodo.NodoAST;
+import generaciondecodigo.ExecuteCGVisitor;
+import generaciondecodigo.VisitorOffset;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 import lexico.Lexico;
 import sintactico.Parser;
 import visitor.Visitor;
 import manejadorerrores.ME;
-import semantico.VisitorIdentificacion;
-import semantico.VisitorlValue;
+import semantico.*;
 
 public class Main {
 	public static void main(String args[]) throws IOException {
-		if (args.length < 1) {
-			System.err.println("Necesito el archivo de entrada.");
+		if (args.length < 2) {
+			System.err.println("Necesito el archivo de entrada y el nombre del de salida.");
 			return;
 		}
 
@@ -37,9 +38,19 @@ public class Main {
 		NodoAST programa = parser.getAST();
 		Visitor v1 = new VisitorIdentificacion();
 		Visitor v2 = new VisitorlValue();
+		Visitor v3 = new VisitorComprobacionTipos();
+		
+		Visitor v4 = new VisitorOffset();
+		
+		Visitor v5 = new ExecuteCGVisitor(args[0],args[1]);
 
 		programa.accept(v1, null);
 		programa.accept(v2, null);
+		programa.accept(v3, null);
+		
+		programa.accept(v4, null);
+		
+		programa.accept(v5, null);
 
 		// * Comprobamos si hubo errores
 		if (ME.getME().huboErrores()) {

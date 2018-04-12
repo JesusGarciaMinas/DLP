@@ -1,11 +1,10 @@
 package ast.tipo;
 
-import ast.nodo.AbstractNodoAST;
 import ast.nodo.NodoAST;
 import manejadorerrores.ME;
 import visitor.Visitor;
 
-public class TipoError extends AbstractNodoAST implements Tipo {
+public class TipoError extends AbstractTipo {
 
 	private String mensaje;
 
@@ -15,8 +14,8 @@ public class TipoError extends AbstractNodoAST implements Tipo {
 		ME.getME().añadirErrores(this);
 	}
 
-	public TipoError(Object nodo, String mensaje) {
-		this(((NodoAST) nodo).getLinea(),((NodoAST) nodo).getColumna(), mensaje);
+	public TipoError(NodoAST nodo, String mensaje) {
+		this(nodo.getLinea(), nodo.getColumna(), mensaje);
 	}
 
 	public String getMensaje() {
@@ -35,5 +34,10 @@ public class TipoError extends AbstractNodoAST implements Tipo {
 	@Override
 	public Object accept(Visitor visitor, Object param) {
 		return visitor.visit(this, param);
+	}
+
+	@Override
+	public int numeroDeBytes() {
+		throw new IllegalStateException("Este programa nunca debió llegar a ejecutarse");
 	}
 }

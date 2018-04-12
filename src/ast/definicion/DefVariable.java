@@ -10,6 +10,7 @@ public class DefVariable extends AbstractNodoAST implements Definicion, Sentenci
 	private String nombre;
 	private Tipo tipo;
 	private int ambito;
+	private int offset; //lo mismo para campos
 
 	public DefVariable(int linea, int columna, String nombre, Tipo tipo) {
 		super(linea, columna);
@@ -29,7 +30,7 @@ public class DefVariable extends AbstractNodoAST implements Definicion, Sentenci
 		return tipo;
 	}
 
-	private void setTipo(Tipo tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -41,14 +42,21 @@ public class DefVariable extends AbstractNodoAST implements Definicion, Sentenci
 		this.ambito = ambito;
 	}
 	
-
 	@Override
 	public String toString() {
-		return "DefVariable [nombre=" + nombre + ", tipo=" + tipo + "]";
+		return "DefVariable [nombre=" + nombre + ", tipo=" + tipo + ", ambito=" + ambito + ", offset=" + offset + "]";
 	}
-	
+
 	@Override
 	public Object accept(Visitor visitor, Object param) {
 		return visitor.visit(this, param);
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 }

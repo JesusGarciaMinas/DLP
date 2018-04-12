@@ -1,0 +1,17 @@
+
+var i int;
+var f float32;
+
+var a struct  {
+  a int;
+};
+
+func main() {
+  write(i && f); // * Error 1 Comparacion con tipo entero ambos
+  write(a >= 3);  // * Error 2 a no es de tipo entero
+  while f {     // * Error 3 f no es de tipo entero
+    if f {      // * Error 4 lo mismo
+      write(!f);   // * Error 5 lo mismo
+	}
+  }
+}

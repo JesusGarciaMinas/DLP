@@ -1,0 +1,10 @@
+var integer int;
+var character char;
+var real float32;
+
+func main() {
+  read(integer); 
+  character=8.5; // * Error 1 no coincide el tipo
+  3=integer; // * Error 2 lvalue
+  read (integer+2); // * Error 3 lvalue
+}

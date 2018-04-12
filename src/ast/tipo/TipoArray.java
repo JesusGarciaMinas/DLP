@@ -1,9 +1,8 @@
 package ast.tipo;
 
-import ast.nodo.AbstractNodoAST;
 import visitor.Visitor;
 
-public class TipoArray extends AbstractNodoAST implements Tipo {
+public class TipoArray extends AbstractTipo {
 
 	private int tamaño;
 	private Tipo tipo;
@@ -38,5 +37,17 @@ public class TipoArray extends AbstractNodoAST implements Tipo {
 	@Override
 	public Object accept(Visitor visitor, Object param) {
 		return visitor.visit(this, param);
+	}
+
+	@Override
+	public Tipo corchetes(Tipo tipo) {
+		if (tipo instanceof TipoEntero || tipo instanceof TipoChar)
+			return this.tipo;
+		return null;
+	}
+	
+	@Override
+	public int numeroDeBytes() {
+		return tamaño * tipo.numeroDeBytes();
 	}
 }
