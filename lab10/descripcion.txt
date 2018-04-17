@@ -43,7 +43,7 @@ Instrucciones logicas.
 	or 				Para la operacion logica "or"
 	not				Para la operacion logica unaria "not"
 
-Intrudcciones input y output
+Instrucciones input y output
 	outb, out[i], outf 	Desapila un valor de la pila y lo muestra en la consola
 	inb, in[i], inf 	Lee un valor por teclado y lo apila en la pila
 

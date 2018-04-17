@@ -1,5 +1,5 @@
 
-#source "lab2/entrada.peque.txt"
+#source "entrada.peque.txt"
 
 	' * var v [10, float32] (offset 0)
 

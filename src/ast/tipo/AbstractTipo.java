@@ -79,4 +79,9 @@ public abstract class AbstractTipo extends AbstractNodoAST implements Tipo {
 	public Tipo superType (Tipo tipo) {
 		return null;
 	}
+	
+	@Override
+	public Campo get (String nombre) {
+		return null;
+	}
 }

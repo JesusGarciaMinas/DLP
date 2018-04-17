@@ -42,4 +42,6 @@ func main() {
 		write('\n');
 		i=i+1;
 	}
+
 }
+	

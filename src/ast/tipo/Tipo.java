@@ -35,4 +35,6 @@ public interface Tipo extends NodoAST {
 	public char suffix();
 	
 	public Tipo superType(Tipo tipo);
+
+	public Campo get(String nombre);
 }

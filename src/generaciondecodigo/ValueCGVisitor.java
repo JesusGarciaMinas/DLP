@@ -16,6 +16,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 		super();
 		this.cg = cg;
 		acg = new AddressCGVisitor(cg);
+		acg.setVcg(this);
 	}
 
 	@Override
@@ -148,6 +149,28 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 			cg.convert(TipoEntero.getInstancia(), u.getTipoExpresion());
 			u.getTipoExpresion().accept(this, param);
 			cg.sub(u.getTipoExpresion().suffix());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(AccesoArray a, Object param) {
+		try {
+			a.accept(acg, param);
+			cg.load(a.getTipoExpresion().suffix());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Object visit(AccesoCampo c, Object param) {
+		try {
+			c.accept(acg, param);
+			cg.load(c.getTipoExpresion().suffix());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -31,7 +31,7 @@ public class TipoArray extends AbstractTipo {
 
 	@Override
 	public String toString() {
-		return "TipoArray [tamaño=" + tamaño + ", tipo=" + tipo + "]";
+		return "[" + tamaño + ", " + tipo + "]";
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class TipoArray extends AbstractTipo {
 			return this.tipo;
 		return null;
 	}
-	
+
 	@Override
 	public int numeroDeBytes() {
 		return tamaño * tipo.numeroDeBytes();

@@ -53,6 +53,9 @@ public class VisitorComprobacionTipos extends AbstractVisitor {
 		w.getCondicion().accept(this, visit);
 		if (!w.getCondicion().getTipoExpresion().esLogico())
 			w.getCondicion().setTipoExpresion(new TipoError(w, "La condición del While no es una expresión lógica"));
+		for (Sentencia s : w.getSentWhile()) {
+			s.accept(this, visit);
+		}
 		return null;
 	}
 

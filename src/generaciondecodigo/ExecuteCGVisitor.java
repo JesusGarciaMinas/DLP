@@ -22,6 +22,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 		cg = new CodeGenerator(input, output);
 		vcg = new ValueCGVisitor(cg);
 		acg = new AddressCGVisitor(cg);
+		acg.setVcg(vcg);
 	}
 
 	@Override
@@ -51,16 +52,10 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 
 	@Override
 	public Object visit(Escritura w, Object param) {
-
-		try {
-			cg.saltoDeCarro();
-			cg.line(w.getLinea());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		for (Expresion exp : w.getExpresiones()) {
 			try {
-				cg.tabCarro("' * Write");
+				cg.saltoDeCarro();
+				cg.line(w.getLinea());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -76,20 +71,18 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 
 	@Override
 	public Object visit(Lectura l, Object param) {
-
-		try {
-			cg.saltoDeCarro();
-			cg.line(l.getLinea());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		for (Expresion exp : l.getExpresiones()) {
 			try {
-				cg.tabCarro("' * Read");
+				cg.saltoDeCarro();
+				cg.line(l.getLinea());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+//			try {
+//				cg.tabCarro("' * Read");
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 			exp.accept(acg, param);
 			try {
 				cg.in(exp.getTipoExpresion().suffix());
@@ -109,7 +102,6 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		a.getExpLeft().accept(acg, param);
 		a.getExpRight().accept(vcg, param);
 		try {
@@ -124,7 +116,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 	@Override
 	public Object visit(DefVariable v, Object param) {
 		try {
-			cg.tabCarro("' * var " + v.getNombre() + " " +  v.getTipo().toString() + " (offset " + v.getOffset() + ")");
+			cg.tabCarro("' * var " + v.getNombre() + " " + v.getTipo().toString() + " (offset " + v.getOffset() + ")");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -135,12 +127,15 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 	public Object visit(DefFuncion f, Object param) {
 		TipoFuncion tipo = ((TipoFuncion) f.getTipo());
 		try {
-			cg.saltoDeCarro();
-			cg.line(f.getCuerpo().get(0).getLinea()-1);
+//			cg.saltoDeCarro();
+//			if (f.getCuerpo().isEmpty())
+//				cg.line(f.getLinea()-1);
+//			else
+//				cg.line(f.getCuerpo().get(0).getLinea() - 1);
 			cg.saltoDeCarro();
 			cg.write(" " + f.getNombre() + ":");
 			cg.saltoDeCarro();
-			cg.tabCarro("' * Parameters");
+			cg.tabCarro("'  * Parameters");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -148,7 +143,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 			def.accept(this, param);
 
 		try {
-			cg.tabCarro("' * Local variables");
+			cg.tabCarro("'  * Local variables");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -158,6 +153,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 		}
 		try {
 			cg.enter(f.getLocalVarBytes());
+			cg.tabCarro("'  * Function body");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -169,10 +165,56 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 
 		if (tipo.getRetorno() instanceof TipoVoid) {
 			try {
+				cg.saltoDeCarro();
 				cg.ret(0, f.getLocalVarBytes(), tipo.getParamVarBytes());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(SentWhile w, Object param) {
+		try {
+			//cg.write("' * While");
+	        cg.saltoDeCarro();
+	        cg.line(w.getLinea());
+			int label = cg.getLabels(2);
+			cg.id("label_" + label);
+			w.getCondicion().accept(vcg, param);
+			cg.convert(w.getCondicion().getTipoExpresion(), TipoEntero.getInstancia());
+			cg.jz("label_" + (label + 1));
+			for (Sentencia s : w.getSentWhile()) {
+				s.accept(this, param);
+			}
+			cg.jmp("label_" + label);
+			cg.id("label_" + (label + 1));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(SentIf i, Object param) {
+		try {
+			//cg.write("' * If");
+	        cg.saltoDeCarro();
+	        cg.line(i.getLinea());
+			int label = cg.getLabels(2);
+			i.getCondicion().accept(vcg, param);
+			cg.convert(i.getCondicion().getTipoExpresion(), TipoEntero.getInstancia());
+			cg.jz("label_" + label);
+			for (Sentencia s : i.getSentIf())
+				s.accept(this, param);
+			cg.jmp("label_" + (label + 1));
+			cg.id("label_" + label);
+			for (Sentencia s : i.getSentElse())
+				s.accept(this, param);
+			cg.id("label_" + (label + 1));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

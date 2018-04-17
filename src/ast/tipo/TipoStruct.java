@@ -24,7 +24,15 @@ public class TipoStruct extends AbstractTipo {
 
 	@Override
 	public String toString() {
-		return "TipoStruct [campos=" + campos + "]";
+		String cad = "(";
+		for (int i=0; i<campos.size()-1;i++) {
+			cad +=campos.get(i);
+			cad +="x";
+			
+		}
+		cad += campos.get(campos.size()-1);
+		cad += ")";
+		return cad;
 	}
 
 	@Override
@@ -46,5 +54,13 @@ public class TipoStruct extends AbstractTipo {
 		for (Campo c : campos)
 			sum += c.numeroDeBytes();
 		return sum;
+	}
+
+	@Override
+	public Campo get(String nombre) {
+		for (Campo c : campos)
+			if (nombre.equals(c.getNombreCampo()))
+				return c;
+		throw new IllegalStateException("El identificador " + nombre + " no se encuentra en el struct");
 	}
 }

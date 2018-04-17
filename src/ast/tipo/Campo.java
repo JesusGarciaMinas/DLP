@@ -32,7 +32,7 @@ public class Campo extends AbstractTipo {
 
 	@Override
 	public String toString() {
-		return "Campo [nombreCampo=" + nombreCampo + ", tipoCampo=" + tipoCampo + "]";
+		return "(" + nombreCampo + " x " + tipoCampo + ")";
 	}
 
 	@Override
