@@ -81,8 +81,8 @@ programa: definiciones funcmain;
 }
 
 funcmain: RES_FUNC RES_MAIN PAR_AB PAR_CE LLA_AB cuerpofuncion LLA_CE;		{
-																				$$ = new DefinicionFuncion(l(), c(), 
-																				new TipoFuncion(l(), c(), new TipoVoid(l(), c()), new ArrayList<DefVariable>()), 
+																				$$ = new DefFuncion(l(), c(), 
+																				new TipoFuncion(l(), c(), TipoVoid.getInstancia(), new ArrayList<DefVariable>()), 
 																				"main", (List<Sentencia>) $6);
 																			}
 
@@ -135,13 +135,13 @@ lvar: lvar SIM_CO IDENT		{
 	;
 
 funcion: RES_FUNC IDENT PAR_AB parametrosopc PAR_CE tiposimple LLA_AB cuerpofuncion LLA_CE 	{
-																							$$ = new DefinicionFuncion(l(), c(), 
+																							$$ = new DefFuncion(l(), c(), 
 																							new TipoFuncion(l(), c(), (Tipo) $6, (List<DefVariable>) $4), 
 																							(String) $2, (List<Sentencia>) $8);
 																					 	}
 	   | RES_FUNC IDENT PAR_AB parametrosopc PAR_CE LLA_AB cuerpofuncion LLA_CE 		{
-																							$$ = new DefinicionFuncion(l(), c(), 
-																							new TipoFuncion(l(), c(), new TipoVoid(l(), c()), (List<DefVariable>) $4), 
+																							$$ = new DefFuncion(l(), c(), 
+																							new TipoFuncion(l(), c(), TipoVoid.getInstancia(), (List<DefVariable>) $4), 
 																							(String) $2, (List<Sentencia>) $7);
 																						}
 
@@ -175,9 +175,9 @@ tipo: tiposimple							{ $$ = $1; }
 	| RES_STRUCT LLA_AB campos LLA_CE		{ $$ = new TipoStruct(l(), c(), (List<Campo>)$3); }
 	;
 
-tiposimple: RES_INT								{ $$ = new TipoEntero(l(), c()); }
-		  | RES_F32								{ $$ = new TipoFloat32(l(), c()); }
-	      | RES_CHAR							{ $$ = new TipoChar(l(), c()); }
+tiposimple: RES_INT								{ $$ = TipoEntero.getInstancia(); }
+		  | RES_F32								{ $$ = TipoDecimal.getInstancia(); }
+	      | RES_CHAR							{ $$ = TipoChar.getInstancia(); }
 	;
 	
 campos: campos campo		{

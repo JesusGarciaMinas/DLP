@@ -11,7 +11,7 @@ public class LiteralDecimal extends AbstractExpresion implements Expresion {
 		setValor(valor);
 	}
 
-	public double getValor() {
+	public float getValor() {
 		return valor;
 	}
 

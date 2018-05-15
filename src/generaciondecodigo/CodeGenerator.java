@@ -72,7 +72,7 @@ public class CodeGenerator {
 	/**
 	 * Apila el número real (4 bytes) en la pila
 	 */
-	public void push(double f) throws IOException {
+	public void push(float f) throws IOException {
 		tabCarro("pushf\t" + f);
 	}
 
@@ -115,8 +115,8 @@ public class CodeGenerator {
 	/**
 	 * Desapila 1, 2 o 4 bytes, respectivamente, de la pila
 	 */
-	public void pop(String suf) throws IOException {
-		tabCarro("pop" + suf);
+	public void pop(char c) throws IOException {
+		tabCarro("pop" + c);
 	}
 
 	/**

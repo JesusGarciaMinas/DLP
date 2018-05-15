@@ -165,7 +165,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Object visit(AccesoCampo c, Object param) {
 		try {
@@ -174,6 +174,22 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public Object visit(InvocacionFuncion f, Object param) {
+		try {
+			int contador = 0;
+			for (Expresion e : f.getArgumentos()) {
+				e.accept(this, param);
+				cg.convert(e.getTipoExpresion(), f.getArgumentos().get(contador++).getTipoExpresion());
+			}
+			cg.call(f.getNombre().getNombre());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 }

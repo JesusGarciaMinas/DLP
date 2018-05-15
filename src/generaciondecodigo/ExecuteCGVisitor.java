@@ -78,11 +78,11 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-//			try {
-//				cg.tabCarro("' * Read");
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			// try {
+			// cg.tabCarro("' * Read");
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
 			exp.accept(acg, param);
 			try {
 				cg.in(exp.getTipoExpresion().suffix());
@@ -127,11 +127,11 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 	public Object visit(DefFuncion f, Object param) {
 		TipoFuncion tipo = ((TipoFuncion) f.getTipo());
 		try {
-//			cg.saltoDeCarro();
-//			if (f.getCuerpo().isEmpty())
-//				cg.line(f.getLinea()-1);
-//			else
-//				cg.line(f.getCuerpo().get(0).getLinea() - 1);
+			// cg.saltoDeCarro();
+			// if (f.getCuerpo().isEmpty())
+			// cg.line(f.getLinea()-1);
+			// else
+			// cg.line(f.getCuerpo().get(0).getLinea() - 1);
 			cg.saltoDeCarro();
 			cg.write(" " + f.getNombre() + ":");
 			cg.saltoDeCarro();
@@ -149,7 +149,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 		}
 		for (Sentencia sen : f.getCuerpo()) {
 			if (sen instanceof DefVariable)
-				sen.accept(this, param);
+				sen.accept(this, f);
 		}
 		try {
 			cg.enter(f.getLocalVarBytes());
@@ -160,7 +160,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 
 		for (Sentencia sen : f.getCuerpo()) {
 			if (!(sen instanceof DefVariable))
-				sen.accept(this, param);
+				sen.accept(this, f);
 		}
 
 		if (tipo.getRetorno() instanceof TipoVoid) {
@@ -177,9 +177,9 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 	@Override
 	public Object visit(SentWhile w, Object param) {
 		try {
-			//cg.write("' * While");
-	        cg.saltoDeCarro();
-	        cg.line(w.getLinea());
+			// cg.write("' * While");
+			cg.saltoDeCarro();
+			cg.line(w.getLinea());
 			int label = cg.getLabels(2);
 			cg.id("label_" + label);
 			w.getCondicion().accept(vcg, param);
@@ -199,9 +199,9 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 	@Override
 	public Object visit(SentIf i, Object param) {
 		try {
-			//cg.write("' * If");
-	        cg.saltoDeCarro();
-	        cg.line(i.getLinea());
+			// cg.write("' * If");
+			cg.saltoDeCarro();
+			cg.line(i.getLinea());
 			int label = cg.getLabels(2);
 			i.getCondicion().accept(vcg, param);
 			cg.convert(i.getCondicion().getTipoExpresion(), TipoEntero.getInstancia());
@@ -213,6 +213,40 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 			for (Sentencia s : i.getSentElse())
 				s.accept(this, param);
 			cg.id("label_" + (label + 1));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(InvocacionFuncion f, Object param) {
+
+		try {
+			cg.saltoDeCarro();
+			cg.line(f.getLinea());
+			f.accept(vcg, param);
+			TipoFuncion tf = (TipoFuncion) f.getNombre().getTipoExpresion();
+			if (!(tf.getRetorno() instanceof TipoVoid)) {
+				cg.pop(tf.getRetorno().suffix());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(SentReturn r, Object param) {
+		try {
+			cg.saltoDeCarro();
+			cg.line(r.getLinea());
+			cg.tabCarro("' * Return");
+			r.getExpresion().accept(vcg, param);
+			DefFuncion df = (DefFuncion) param;
+			TipoFuncion tf = (TipoFuncion) df.getTipo();
+			cg.convert(tf.getRetorno(), r.getExpresion().getTipoExpresion());
+			cg.ret(r.getExpresion().getTipoExpresion().numeroDeBytes(), df.getLocalVarBytes(), tf.getParamVarBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
