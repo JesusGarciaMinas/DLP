@@ -10,6 +10,7 @@ import ast.expresion.Aritmetica;
 import ast.expresion.Cast;
 import ast.expresion.Comparacion;
 import ast.expresion.Expresion;
+import ast.expresion.ExpresionExamen;
 import ast.expresion.InvocacionFuncion;
 import ast.expresion.LiteralChar;
 import ast.expresion.LiteralDecimal;
@@ -25,6 +26,7 @@ import ast.sentencia.SentIf;
 import ast.sentencia.SentReturn;
 import ast.sentencia.SentWhile;
 import ast.sentencia.Sentencia;
+import ast.sentencia.SentenciaBinaria;
 import ast.tipo.Campo;
 import ast.tipo.TipoArray;
 import ast.tipo.TipoChar;
@@ -233,6 +235,19 @@ public abstract class AbstractVisitor implements Visitor {
 	public Object visit(Programa p, Object param) {
 		for (Definicion d: p.getDefiniciones())
 			d.accept(this, param);
+		return null;
+	}
+	
+	@Override
+	public Object visit (SentenciaBinaria b, Object param) {
+		b.getExpLeft().accept(this, param);
+		b.getExpRight().accept(this, param);
+		return null;
+	}
+	
+	public Object visit(ExpresionExamen e, Object param) {
+		e.getExpLeft().accept(this, param);
+		e.getExpRight().accept(this, param);
 		return null;
 	}
 }

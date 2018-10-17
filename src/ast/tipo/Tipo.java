@@ -37,4 +37,6 @@ public interface Tipo extends NodoAST {
 	public Tipo superType(Tipo tipo);
 
 	public Campo get(String nombre);
+	
+	public Tipo sentenciasExamen(Tipo tipo);
 }

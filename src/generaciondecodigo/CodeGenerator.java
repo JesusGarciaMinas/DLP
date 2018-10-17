@@ -258,14 +258,14 @@ public class CodeGenerator {
 	/**
 	 * Para la operacion logica "and"
 	 */
-	private void and() throws IOException {
+	public void and() throws IOException {
 		tabCarro("and");
 	}
 
 	/**
 	 * Para la operacion logica "or"
 	 */
-	private void or() throws IOException {
+	public void or() throws IOException {
 		tabCarro("or");
 	}
 
@@ -274,6 +274,17 @@ public class CodeGenerator {
 	 */
 	public void not() throws IOException {
 		tabCarro("not");
+	}
+	
+	public void examen (String operando) throws IOException {
+		switch (operando) {
+		case "&&=":
+			and();
+			break;
+		case "||=":
+			or();
+			break;
+		}
 	}
 
 	/**

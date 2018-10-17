@@ -15,6 +15,15 @@ public class VisitorlValue extends AbstractVisitor {
 					new TipoError(a.getLinea(), a.getColumna(), "Hay un error de tipo lValue en la asignacion"));
 		return null;
 	}
+	
+	@Override
+	public Object visit(SentenciaBinaria b, Object param) {
+		super.visit(b, param);
+		if (!b.getExpLeft().islValue())
+			b.getExpLeft().setTipoExpresion(
+					new TipoError(b.getLinea(), b.getColumna(), "Hay un error de tipo lValue en la asignacion"));
+		return null;
+	}
 
 	@Override
 	public Object visit(AccesoCampo c, Object param) {

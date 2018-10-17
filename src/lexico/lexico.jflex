@@ -82,6 +82,8 @@ ComMulti = "/*"~"*/"
 ComUni = "//".*
 Blancos = [\ \n\r\t\f]
 Identificador = [a-zA-Z_ñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]*
+SentAnd = "&&="
+SentOr = "||="
 
 %%
 // ************  Acciones ********************
@@ -251,6 +253,14 @@ Identificador = [a-zA-Z_ñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]*
 // * Simbolo punto
 {SimboloPunto}	{this.yylval = yytext();
 				 return Parser.SIM_PTO; }
+				 
+// * Sentencia and
+{SentAnd}	{this.yylval = yytext();
+				 return Parser.SEN_AND; }
+				 
+// * Sentencia or
+{SentOr}	{this.yylval = yytext();
+				 return Parser.SEN_OR; }
 				  
 // * Comentarios y blancos
 {ComMulti} | {ComUni} | {Blancos}	{ }

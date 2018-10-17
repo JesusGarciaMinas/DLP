@@ -223,4 +223,34 @@ public class VisitorComprobacionTipos extends AbstractVisitor {
 		}
 		return true;
 	}
+
+	@Override
+	public Object visit(SentenciaBinaria b, Object visit) {
+		super.visit(b, visit);
+		b.setTipoSentencia(b.getExpLeft().getTipoExpresion().sentenciasExamen(b.getExpRight().getTipoExpresion()));
+		if (b.getTipoSentencia() == null) {
+			if (!(b.getExpLeft().getTipoExpresion() instanceof TipoEntero))
+				b.setTipoSentencia(new TipoError(b, "El tipo de la izquierda es " + b.getExpLeft().getTipoExpresion()
+						+ " por lo que no se puede realizar esta operación"));
+			else
+				b.setTipoSentencia(new TipoError(b, "El tipo de la derecha es " + b.getExpRight().getTipoExpresion()
+						+ " por lo que no se puede realizar esta operación"));
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(ExpresionExamen e, Object visit) {
+		super.visit(e, visit);
+		e.setTipoExpresion(e.getExpLeft().getTipoExpresion().sentenciasExamen(e.getExpRight().getTipoExpresion()));
+		if (e.getTipoExpresion() == null) {
+			if (!(e.getExpLeft().getTipoExpresion() instanceof TipoEntero))
+				e.setTipoExpresion(new TipoError(e, "El tipo de la izquierda es " + e.getExpLeft().getTipoExpresion()
+						+ " por lo que no se puede realizar esta operación"));
+			else
+				e.setTipoExpresion(new TipoError(e, "El tipo de la derecha es " + e.getExpRight().getTipoExpresion()
+						+ " por lo que no se puede realizar esta operación"));
+		}
+		return null;
+	}
 }

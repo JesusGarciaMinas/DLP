@@ -56,8 +56,10 @@ import ast.sentencia.*;
 %token RES_MAIN
 %token RES_VOID
 %token SIM_PTO
+%token SEN_AND
+%token SEN_OR
 
-%right SIM_IG
+%right SIM_IG SEN_OR SEN_AND 
 %left BOOL_AND BOOL_OR
 %left SIM_COMIG SIM_MA SIM_ME SIM_DIST SIM_MAIG SIM_MEIG
 %left OP_MAS OP_MENOS
@@ -144,6 +146,7 @@ funcion: RES_FUNC IDENT PAR_AB parametrosopc PAR_CE tiposimple LLA_AB cuerpofunc
 																							new TipoFuncion(l(), c(), TipoVoid.getInstancia(), (List<DefVariable>) $4), 
 																							(String) $2, (List<Sentencia>) $7);
 																						}
+	   ;
 
 
 cuerpofuncion: defvaropc sentenciasopc;		{
@@ -240,6 +243,8 @@ sentencia: RES_WRITE PAR_AB expresiones PAR_CE SIM_PC		{ $$ = new Escritura(l(),
 		 | if												{ $$ = $1; }
 		 | IDENT PAR_AB PAR_CE SIM_PC						{ $$ = new InvocacionFuncion(l(), c(), new Variable(l(), c(), (String) $1), new ArrayList<Expresion>()); }
          | IDENT PAR_AB expresiones PAR_CE SIM_PC			{ $$ = new InvocacionFuncion(l(), c(), new Variable(l(), c(), (String) $1), (List<Expresion>) $3); }
+         | expresion SEN_AND expresion SIM_PC				{ $$ = new SentenciaBinaria(l(), c(), (Expresion) $1, (String) $2, (Expresion) $3); }
+         | expresion SEN_OR expresion SIM_PC				{ $$ = new SentenciaBinaria(l(), c(), (Expresion) $1, (String) $2, (Expresion) $3); }
          ;
 
 expresiones: expresiones SIM_CO expresion		{
@@ -279,6 +284,8 @@ expresion: expresion OP_MAS expresion			{ $$ = new Aritmetica(l(), c(), (Expresi
          | tipo PAR_AB expresion PAR_CE			{ $$ = new Cast(l(), c(), (Tipo)$1, (Expresion) $3); }
          | expresion COR_AB expresion COR_CE	{ $$ = new AccesoArray(l(), c(), (Expresion) $1, (Expresion) $3); }
          | expresion SIM_PTO IDENT				{ $$ = new AccesoCampo(l(), c(), (Expresion) $1, (String) $3); }
+         | expresion SEN_AND expresion			{ $$ = new ExpresionExamen(l(), c(), (Expresion) $1, (String) $2, (Expresion) $3); }
+         | expresion SEN_OR expresion			{ $$ = new ExpresionExamen(l(), c(), (Expresion) $1, (String) $2, (Expresion) $3); }
          ;
 %%
 

@@ -84,4 +84,8 @@ public abstract class AbstractTipo extends AbstractNodoAST implements Tipo {
 	public Campo get (String nombre) {
 		return null;
 	}
+	
+	public Tipo sentenciasExamen(Tipo tipo) {
+		return null;
+	}
 }

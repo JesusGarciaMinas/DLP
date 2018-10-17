@@ -39,6 +39,8 @@ public interface Visitor {
 	public Object visit (Lectura l, Object param);
 	public Object visit (Asignacion a, Object param);
 	
+	public Object visit (SentenciaBinaria b, Object param);
+	
 	//Tipos
 	public Object visit (Campo c, Object param);
 	public Object visit (TipoArray a, Object param);
@@ -56,4 +58,5 @@ public interface Visitor {
 	
 	//Programa
 	public Object visit (Programa p, Object param);
+	public Object visit(ExpresionExamen e, Object param);
 }

@@ -68,35 +68,39 @@
   45            | if
   46            | IDENT PAR_AB PAR_CE SIM_PC
   47            | IDENT PAR_AB expresiones PAR_CE SIM_PC
+  48            | expresion SEN_AND expresion SIM_PC
+  49            | expresion SEN_OR expresion SIM_PC
 
-  48  expresiones : expresiones SIM_CO expresion
-  49              | expresion
+  50  expresiones : expresiones SIM_CO expresion
+  51              | expresion
 
-  50  expresion : expresion OP_MAS expresion
-  51            | expresion OP_MENOS expresion
-  52            | expresion OP_MUL expresion
-  53            | expresion OP_DIV expresion
-  54            | expresion OP_MOD expresion
-  55            | expresion BOOL_AND expresion
-  56            | expresion BOOL_OR expresion
-  57            | BOOL_NOT expresion
-  58            | expresion SIM_MA expresion
-  59            | expresion SIM_ME expresion
-  60            | expresion SIM_MAIG expresion
-  61            | expresion SIM_MEIG expresion
-  62            | expresion SIM_DIST expresion
-  63            | expresion SIM_COMIG expresion
-  64            | OP_MENOS expresion
-  65            | PAR_AB expresion PAR_CE
-  66            | IDENT
-  67            | CTE_ENTERA
-  68            | CTE_DECIMAL
-  69            | CHAR
-  70            | IDENT PAR_AB expresiones PAR_CE
-  71            | IDENT PAR_AB PAR_CE
-  72            | tipo PAR_AB expresion PAR_CE
-  73            | expresion COR_AB expresion COR_CE
-  74            | expresion SIM_PTO IDENT
+  52  expresion : expresion OP_MAS expresion
+  53            | expresion OP_MENOS expresion
+  54            | expresion OP_MUL expresion
+  55            | expresion OP_DIV expresion
+  56            | expresion OP_MOD expresion
+  57            | expresion BOOL_AND expresion
+  58            | expresion BOOL_OR expresion
+  59            | BOOL_NOT expresion
+  60            | expresion SIM_MA expresion
+  61            | expresion SIM_ME expresion
+  62            | expresion SIM_MAIG expresion
+  63            | expresion SIM_MEIG expresion
+  64            | expresion SIM_DIST expresion
+  65            | expresion SIM_COMIG expresion
+  66            | OP_MENOS expresion
+  67            | PAR_AB expresion PAR_CE
+  68            | IDENT
+  69            | CTE_ENTERA
+  70            | CTE_DECIMAL
+  71            | CHAR
+  72            | IDENT PAR_AB expresiones PAR_CE
+  73            | IDENT PAR_AB PAR_CE
+  74            | tipo PAR_AB expresion PAR_CE
+  75            | expresion COR_AB expresion COR_CE
+  76            | expresion SIM_PTO IDENT
+  77            | expresion SEN_AND expresion
+  78            | expresion SEN_OR expresion
 
 state 0
 	$accept : . programa $end  (0)
@@ -557,19 +561,19 @@ state 52
 
 
 state 53
-	expresion : CTE_ENTERA .  (67)
+	expresion : CTE_ENTERA .  (69)
 
-	.  reduce 67
+	.  reduce 69
 
 
 state 54
-	expresion : CTE_DECIMAL .  (68)
+	expresion : CTE_DECIMAL .  (70)
 
-	.  reduce 68
+	.  reduce 70
 
 
 state 55
-	expresion : PAR_AB . expresion PAR_CE  (65)
+	expresion : PAR_AB . expresion PAR_CE  (67)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -591,39 +595,41 @@ state 55
 
 
 state 56
-	expresion : CHAR .  (69)
+	expresion : CHAR .  (71)
 
-	.  reduce 69
+	.  reduce 71
 
 
 state 57
 	sentencia : IDENT . PAR_AB PAR_CE SIM_PC  (46)
 	sentencia : IDENT . PAR_AB expresiones PAR_CE SIM_PC  (47)
-	expresion : IDENT .  (66)
-	expresion : IDENT . PAR_AB expresiones PAR_CE  (70)
-	expresion : IDENT . PAR_AB PAR_CE  (71)
+	expresion : IDENT .  (68)
+	expresion : IDENT . PAR_AB expresiones PAR_CE  (72)
+	expresion : IDENT . PAR_AB PAR_CE  (73)
 
 	PAR_AB  shift 77
-	COR_AB  reduce 66
-	OP_MAS  reduce 66
-	OP_MENOS  reduce 66
-	OP_MUL  reduce 66
-	OP_DIV  reduce 66
-	OP_MOD  reduce 66
-	SIM_COMIG  reduce 66
-	SIM_DIST  reduce 66
-	SIM_MAIG  reduce 66
-	SIM_MEIG  reduce 66
-	SIM_IG  reduce 66
-	SIM_MA  reduce 66
-	SIM_ME  reduce 66
-	BOOL_AND  reduce 66
-	BOOL_OR  reduce 66
-	SIM_PTO  reduce 66
+	COR_AB  reduce 68
+	OP_MAS  reduce 68
+	OP_MENOS  reduce 68
+	OP_MUL  reduce 68
+	OP_DIV  reduce 68
+	OP_MOD  reduce 68
+	SIM_COMIG  reduce 68
+	SIM_DIST  reduce 68
+	SIM_MAIG  reduce 68
+	SIM_MEIG  reduce 68
+	SIM_IG  reduce 68
+	SIM_MA  reduce 68
+	SIM_ME  reduce 68
+	BOOL_AND  reduce 68
+	BOOL_OR  reduce 68
+	SIM_PTO  reduce 68
+	SEN_AND  reduce 68
+	SEN_OR  reduce 68
 
 
 state 58
-	expresion : OP_MENOS . expresion  (64)
+	expresion : OP_MENOS . expresion  (66)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -645,7 +651,7 @@ state 58
 
 
 state 59
-	expresion : BOOL_NOT . expresion  (57)
+	expresion : BOOL_NOT . expresion  (59)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -755,7 +761,7 @@ state 65
 
 
 state 66
-	expresion : tipo . PAR_AB expresion PAR_CE  (72)
+	expresion : tipo . PAR_AB expresion PAR_CE  (74)
 
 	PAR_AB  shift 87
 	.  error
@@ -775,21 +781,25 @@ state 68
 
 state 69
 	sentencia : expresion . SIM_IG expresion SIM_PC  (42)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+	sentencia : expresion . SEN_AND expresion SIM_PC  (48)
+	sentencia : expresion . SEN_OR expresion SIM_PC  (49)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -807,6 +817,8 @@ state 69
 	BOOL_AND  shift 101
 	BOOL_OR  shift 102
 	SIM_PTO  shift 103
+	SEN_AND  shift 104
+	SEN_OR  shift 105
 	.  error
 
 
@@ -838,7 +850,7 @@ state 70
 	while  goto 68
 	expresion  goto 69
 	if  goto 71
-	sentencia  goto 104
+	sentencia  goto 106
 
 
 state 71
@@ -862,19 +874,133 @@ state 73
 state 74
 	funcion : RES_FUNC IDENT PAR_AB parametrosopc PAR_CE tiposimple LLA_AB cuerpofuncion . LLA_CE  (12)
 
-	LLA_CE  shift 105
+	LLA_CE  shift 107
 	.  error
 
 
 state 75
-	expresion : IDENT .  (66)
-	expresion : IDENT . PAR_AB expresiones PAR_CE  (70)
-	expresion : IDENT . PAR_AB PAR_CE  (71)
+	expresion : IDENT .  (68)
+	expresion : IDENT . PAR_AB expresiones PAR_CE  (72)
+	expresion : IDENT . PAR_AB PAR_CE  (73)
 
-	PAR_AB  shift 106
+	PAR_AB  shift 108
+	LLA_AB  reduce 68
+	PAR_CE  reduce 68
+	COR_AB  reduce 68
+	COR_CE  reduce 68
+	OP_MAS  reduce 68
+	OP_MENOS  reduce 68
+	OP_MUL  reduce 68
+	OP_DIV  reduce 68
+	OP_MOD  reduce 68
+	SIM_COMIG  reduce 68
+	SIM_DIST  reduce 68
+	SIM_MAIG  reduce 68
+	SIM_MEIG  reduce 68
+	SIM_IG  reduce 68
+	SIM_CO  reduce 68
+	SIM_MA  reduce 68
+	SIM_PC  reduce 68
+	SIM_ME  reduce 68
+	BOOL_AND  reduce 68
+	BOOL_OR  reduce 68
+	SIM_PTO  reduce 68
+	SEN_AND  reduce 68
+	SEN_OR  reduce 68
+
+
+state 76
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : PAR_AB expresion . PAR_CE  (67)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	PAR_CE  shift 109
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	.  error
+
+
+state 77
+	sentencia : IDENT PAR_AB . PAR_CE SIM_PC  (46)
+	sentencia : IDENT PAR_AB . expresiones PAR_CE SIM_PC  (47)
+	expresion : IDENT PAR_AB . expresiones PAR_CE  (72)
+	expresion : IDENT PAR_AB . PAR_CE  (73)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	PAR_CE  shift 112
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 113
+	expresiones  goto 114
+
+
+state 78
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : OP_MENOS expresion .  (66)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	SIM_PTO  shift 103
 	LLA_AB  reduce 66
 	PAR_CE  reduce 66
-	COR_AB  reduce 66
 	COR_CE  reduce 66
 	OP_MAS  reduce 66
 	OP_MENOS  reduce 66
@@ -892,153 +1018,53 @@ state 75
 	SIM_ME  reduce 66
 	BOOL_AND  reduce 66
 	BOOL_OR  reduce 66
-	SIM_PTO  reduce 66
-
-
-state 76
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : PAR_AB expresion . PAR_CE  (65)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	PAR_CE  shift 107
-	COR_AB  shift 88
-	OP_MAS  shift 89
-	OP_MENOS  shift 90
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_COMIG  shift 94
-	SIM_DIST  shift 95
-	SIM_MAIG  shift 96
-	SIM_MEIG  shift 97
-	SIM_MA  shift 99
-	SIM_ME  shift 100
-	BOOL_AND  shift 101
-	BOOL_OR  shift 102
-	SIM_PTO  shift 103
-	.  error
-
-
-state 77
-	sentencia : IDENT PAR_AB . PAR_CE SIM_PC  (46)
-	sentencia : IDENT PAR_AB . expresiones PAR_CE SIM_PC  (47)
-	expresion : IDENT PAR_AB . expresiones PAR_CE  (70)
-	expresion : IDENT PAR_AB . PAR_CE  (71)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	PAR_CE  shift 108
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 109
-	expresiones  goto 110
-
-
-state 78
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : OP_MENOS expresion .  (64)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	COR_AB  shift 88
-	SIM_PTO  shift 103
-	LLA_AB  reduce 64
-	PAR_CE  reduce 64
-	COR_CE  reduce 64
-	OP_MAS  reduce 64
-	OP_MENOS  reduce 64
-	OP_MUL  reduce 64
-	OP_DIV  reduce 64
-	OP_MOD  reduce 64
-	SIM_COMIG  reduce 64
-	SIM_DIST  reduce 64
-	SIM_MAIG  reduce 64
-	SIM_MEIG  reduce 64
-	SIM_IG  reduce 64
-	SIM_CO  reduce 64
-	SIM_MA  reduce 64
-	SIM_PC  reduce 64
-	SIM_ME  reduce 64
-	BOOL_AND  reduce 64
-	BOOL_OR  reduce 64
+	SEN_AND  reduce 66
+	SEN_OR  reduce 66
 
 
 state 79
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : BOOL_NOT expresion .  (57)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : BOOL_NOT expresion .  (59)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	SIM_PTO  shift 103
-	LLA_AB  reduce 57
-	PAR_CE  reduce 57
-	COR_CE  reduce 57
-	OP_MAS  reduce 57
-	OP_MENOS  reduce 57
-	OP_MUL  reduce 57
-	OP_DIV  reduce 57
-	OP_MOD  reduce 57
-	SIM_COMIG  reduce 57
-	SIM_DIST  reduce 57
-	SIM_MAIG  reduce 57
-	SIM_MEIG  reduce 57
-	SIM_IG  reduce 57
-	SIM_CO  reduce 57
-	SIM_MA  reduce 57
-	SIM_PC  reduce 57
-	SIM_ME  reduce 57
-	BOOL_AND  reduce 57
-	BOOL_OR  reduce 57
+	LLA_AB  reduce 59
+	PAR_CE  reduce 59
+	COR_CE  reduce 59
+	OP_MAS  reduce 59
+	OP_MENOS  reduce 59
+	OP_MUL  reduce 59
+	OP_DIV  reduce 59
+	OP_MOD  reduce 59
+	SIM_COMIG  reduce 59
+	SIM_DIST  reduce 59
+	SIM_MAIG  reduce 59
+	SIM_MEIG  reduce 59
+	SIM_IG  reduce 59
+	SIM_CO  reduce 59
+	SIM_MA  reduce 59
+	SIM_PC  reduce 59
+	SIM_ME  reduce 59
+	BOOL_AND  reduce 59
+	BOOL_OR  reduce 59
+	SEN_AND  reduce 59
+	SEN_OR  reduce 59
 
 
 state 80
@@ -1060,8 +1086,8 @@ state 80
 
 	tipo  goto 66
 	tiposimple  goto 20
-	expresion  goto 109
-	expresiones  goto 111
+	expresion  goto 113
+	expresiones  goto 115
 
 
 state 81
@@ -1083,13 +1109,13 @@ state 81
 
 	tipo  goto 66
 	tiposimple  goto 20
-	expresion  goto 109
-	expresiones  goto 112
+	expresion  goto 113
+	expresiones  goto 116
 
 
 state 82
 	while : RES_WHILE PAR_AB . expresion PAR_CE LLA_AB sentencias LLA_CE  (29)
-	expresion : PAR_AB . expresion PAR_CE  (65)
+	expresion : PAR_AB . expresion PAR_CE  (67)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1107,28 +1133,30 @@ state 82
 
 	tipo  goto 66
 	tiposimple  goto 20
-	expresion  goto 113
+	expresion  goto 117
 
 
 state 83
 	while : RES_WHILE expresion . LLA_AB sentencias LLA_CE  (30)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
-	LLA_AB  shift 114
+	LLA_AB  shift 118
 	COR_AB  shift 88
 	OP_MAS  shift 89
 	OP_MENOS  shift 90
@@ -1144,130 +1172,14 @@ state 83
 	BOOL_AND  shift 101
 	BOOL_OR  shift 102
 	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
 	.  error
 
 
 state 84
 	if : RES_IF PAR_AB . expresion PAR_CE LLA_AB sentencias LLA_CE else  (31)
-	expresion : PAR_AB . expresion PAR_CE  (65)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 115
-
-
-state 85
-	if : RES_IF expresion . LLA_AB sentencias LLA_CE else  (32)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	LLA_AB  shift 116
-	COR_AB  shift 88
-	OP_MAS  shift 89
-	OP_MENOS  shift 90
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_COMIG  shift 94
-	SIM_DIST  shift 95
-	SIM_MAIG  shift 96
-	SIM_MEIG  shift 97
-	SIM_MA  shift 99
-	SIM_ME  shift 100
-	BOOL_AND  shift 101
-	BOOL_OR  shift 102
-	SIM_PTO  shift 103
-	.  error
-
-
-state 86
-	sentencia : RES_RET expresion . SIM_PC  (43)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	COR_AB  shift 88
-	OP_MAS  shift 89
-	OP_MENOS  shift 90
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_COMIG  shift 94
-	SIM_DIST  shift 95
-	SIM_MAIG  shift 96
-	SIM_MEIG  shift 97
-	SIM_MA  shift 99
-	SIM_PC  shift 117
-	SIM_ME  shift 100
-	BOOL_AND  shift 101
-	BOOL_OR  shift 102
-	SIM_PTO  shift 103
-	.  error
-
-
-state 87
-	expresion : tipo PAR_AB . expresion PAR_CE  (72)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 118
-
-
-state 88
-	expresion : expresion COR_AB . expresion COR_CE  (73)
+	expresion : PAR_AB . expresion PAR_CE  (67)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1288,52 +1200,90 @@ state 88
 	expresion  goto 119
 
 
-state 89
-	expresion : expresion OP_MAS . expresion  (50)
+state 85
+	if : RES_IF expresion . LLA_AB sentencias LLA_CE else  (32)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
+	LLA_AB  shift 120
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
 	.  error
 
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 120
 
+state 86
+	sentencia : RES_RET expresion . SIM_PC  (43)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
-state 90
-	expresion : expresion OP_MENOS . expresion  (51)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_PC  shift 121
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
 	.  error
 
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 121
 
-
-state 91
-	expresion : expresion OP_MUL . expresion  (52)
+state 87
+	expresion : tipo PAR_AB . expresion PAR_CE  (74)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1354,8 +1304,8 @@ state 91
 	expresion  goto 122
 
 
-state 92
-	expresion : expresion OP_DIV . expresion  (53)
+state 88
+	expresion : expresion COR_AB . expresion COR_CE  (75)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1376,8 +1326,8 @@ state 92
 	expresion  goto 123
 
 
-state 93
-	expresion : expresion OP_MOD . expresion  (54)
+state 89
+	expresion : expresion OP_MAS . expresion  (52)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1398,8 +1348,8 @@ state 93
 	expresion  goto 124
 
 
-state 94
-	expresion : expresion SIM_COMIG . expresion  (63)
+state 90
+	expresion : expresion OP_MENOS . expresion  (53)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1420,8 +1370,8 @@ state 94
 	expresion  goto 125
 
 
-state 95
-	expresion : expresion SIM_DIST . expresion  (62)
+state 91
+	expresion : expresion OP_MUL . expresion  (54)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1442,8 +1392,8 @@ state 95
 	expresion  goto 126
 
 
-state 96
-	expresion : expresion SIM_MAIG . expresion  (60)
+state 92
+	expresion : expresion OP_DIV . expresion  (55)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1464,8 +1414,8 @@ state 96
 	expresion  goto 127
 
 
-state 97
-	expresion : expresion SIM_MEIG . expresion  (61)
+state 93
+	expresion : expresion OP_MOD . expresion  (56)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -1484,6 +1434,94 @@ state 97
 	tipo  goto 66
 	tiposimple  goto 20
 	expresion  goto 128
+
+
+state 94
+	expresion : expresion SIM_COMIG . expresion  (65)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 129
+
+
+state 95
+	expresion : expresion SIM_DIST . expresion  (64)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 130
+
+
+state 96
+	expresion : expresion SIM_MAIG . expresion  (62)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 131
+
+
+state 97
+	expresion : expresion SIM_MEIG . expresion  (63)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 132
 
 
 state 98
@@ -1505,124 +1543,170 @@ state 98
 
 	tipo  goto 66
 	tiposimple  goto 20
-	expresion  goto 129
-
-
-state 99
-	expresion : expresion SIM_MA . expresion  (58)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 130
-
-
-state 100
-	expresion : expresion SIM_ME . expresion  (59)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 131
-
-
-state 101
-	expresion : expresion BOOL_AND . expresion  (55)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	expresion  goto 132
-
-
-state 102
-	expresion : expresion BOOL_OR . expresion  (56)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 75
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
 	expresion  goto 133
 
 
-state 103
-	expresion : expresion SIM_PTO . IDENT  (74)
+state 99
+	expresion : expresion SIM_MA . expresion  (60)
 
-	IDENT  shift 134
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 134
+
+
+state 100
+	expresion : expresion SIM_ME . expresion  (61)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 135
+
+
+state 101
+	expresion : expresion BOOL_AND . expresion  (57)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 136
+
+
+state 102
+	expresion : expresion BOOL_OR . expresion  (58)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 137
+
+
+state 103
+	expresion : expresion SIM_PTO . IDENT  (76)
+
+	IDENT  shift 138
 	.  error
 
 
 state 104
+	sentencia : expresion SEN_AND . expresion SIM_PC  (48)
+	expresion : expresion SEN_AND . expresion  (77)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 139
+
+
+state 105
+	sentencia : expresion SEN_OR . expresion SIM_PC  (49)
+	expresion : expresion SEN_OR . expresion  (78)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 140
+
+
+state 106
 	sentencias : sentencias sentencia .  (38)
 
 	.  reduce 38
 
 
-state 105
+state 107
 	funcion : RES_FUNC IDENT PAR_AB parametrosopc PAR_CE tiposimple LLA_AB cuerpofuncion LLA_CE .  (12)
 
 	.  reduce 12
 
 
-state 106
-	expresion : IDENT PAR_AB . expresiones PAR_CE  (70)
-	expresion : IDENT PAR_AB . PAR_CE  (71)
+state 108
+	expresion : IDENT PAR_AB . expresiones PAR_CE  (72)
+	expresion : IDENT PAR_AB . PAR_CE  (73)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
 	PAR_AB  shift 55
-	PAR_CE  shift 135
+	PAR_CE  shift 141
 	COR_AB  shift 13
 	CHAR  shift 56
 	IDENT  shift 75
@@ -1636,124 +1720,105 @@ state 106
 
 	tipo  goto 66
 	tiposimple  goto 20
-	expresion  goto 109
-	expresiones  goto 136
-
-
-state 107
-	expresion : PAR_AB expresion PAR_CE .  (65)
-
-	.  reduce 65
-
-
-state 108
-	sentencia : IDENT PAR_AB PAR_CE . SIM_PC  (46)
-	expresion : IDENT PAR_AB PAR_CE .  (71)
-
-	SIM_PC  shift 137
-	COR_AB  reduce 71
-	OP_MAS  reduce 71
-	OP_MENOS  reduce 71
-	OP_MUL  reduce 71
-	OP_DIV  reduce 71
-	OP_MOD  reduce 71
-	SIM_COMIG  reduce 71
-	SIM_DIST  reduce 71
-	SIM_MAIG  reduce 71
-	SIM_MEIG  reduce 71
-	SIM_IG  reduce 71
-	SIM_MA  reduce 71
-	SIM_ME  reduce 71
-	BOOL_AND  reduce 71
-	BOOL_OR  reduce 71
-	SIM_PTO  reduce 71
+	expresion  goto 113
+	expresiones  goto 142
 
 
 state 109
-	expresiones : expresion .  (49)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+	expresion : PAR_AB expresion PAR_CE .  (67)
 
-	COR_AB  shift 88
-	OP_MAS  shift 89
-	OP_MENOS  shift 90
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_COMIG  shift 94
-	SIM_DIST  shift 95
-	SIM_MAIG  shift 96
-	SIM_MEIG  shift 97
-	SIM_MA  shift 99
-	SIM_ME  shift 100
-	BOOL_AND  shift 101
-	BOOL_OR  shift 102
-	SIM_PTO  shift 103
-	PAR_CE  reduce 49
-	SIM_CO  reduce 49
+	.  reduce 67
 
 
 state 110
-	sentencia : IDENT PAR_AB expresiones . PAR_CE SIM_PC  (47)
-	expresiones : expresiones . SIM_CO expresion  (48)
-	expresion : IDENT PAR_AB expresiones . PAR_CE  (70)
+	expresion : expresion SEN_AND . expresion  (77)
 
-	PAR_CE  shift 138
-	SIM_CO  shift 139
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
 	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 143
 
 
 state 111
-	sentencia : RES_READ PAR_AB expresiones . PAR_CE SIM_PC  (41)
-	expresiones : expresiones . SIM_CO expresion  (48)
+	expresion : expresion SEN_OR . expresion  (78)
 
-	PAR_CE  shift 140
-	SIM_CO  shift 139
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 75
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
 	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	expresion  goto 144
 
 
 state 112
-	sentencia : RES_WRITE PAR_AB expresiones . PAR_CE SIM_PC  (40)
-	expresiones : expresiones . SIM_CO expresion  (48)
+	sentencia : IDENT PAR_AB PAR_CE . SIM_PC  (46)
+	expresion : IDENT PAR_AB PAR_CE .  (73)
 
-	PAR_CE  shift 141
-	SIM_CO  shift 139
-	.  error
+	SIM_PC  shift 145
+	COR_AB  reduce 73
+	OP_MAS  reduce 73
+	OP_MENOS  reduce 73
+	OP_MUL  reduce 73
+	OP_DIV  reduce 73
+	OP_MOD  reduce 73
+	SIM_COMIG  reduce 73
+	SIM_DIST  reduce 73
+	SIM_MAIG  reduce 73
+	SIM_MEIG  reduce 73
+	SIM_IG  reduce 73
+	SIM_MA  reduce 73
+	SIM_ME  reduce 73
+	BOOL_AND  reduce 73
+	BOOL_OR  reduce 73
+	SIM_PTO  reduce 73
+	SEN_AND  reduce 73
+	SEN_OR  reduce 73
 
 
 state 113
-	while : RES_WHILE PAR_AB expresion . PAR_CE LLA_AB sentencias LLA_CE  (29)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : PAR_AB expresion . PAR_CE  (65)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+	expresiones : expresion .  (51)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
-	PAR_CE  shift 142
 	COR_AB  shift 88
 	OP_MAS  shift 89
 	OP_MENOS  shift 90
@@ -1769,10 +1834,83 @@ state 113
 	BOOL_AND  shift 101
 	BOOL_OR  shift 102
 	SIM_PTO  shift 103
-	.  error
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	PAR_CE  reduce 51
+	SIM_CO  reduce 51
 
 
 state 114
+	sentencia : IDENT PAR_AB expresiones . PAR_CE SIM_PC  (47)
+	expresiones : expresiones . SIM_CO expresion  (50)
+	expresion : IDENT PAR_AB expresiones . PAR_CE  (72)
+
+	PAR_CE  shift 146
+	SIM_CO  shift 147
+	.  error
+
+
+state 115
+	sentencia : RES_READ PAR_AB expresiones . PAR_CE SIM_PC  (41)
+	expresiones : expresiones . SIM_CO expresion  (50)
+
+	PAR_CE  shift 148
+	SIM_CO  shift 147
+	.  error
+
+
+state 116
+	sentencia : RES_WRITE PAR_AB expresiones . PAR_CE SIM_PC  (40)
+	expresiones : expresiones . SIM_CO expresion  (50)
+
+	PAR_CE  shift 149
+	SIM_CO  shift 147
+	.  error
+
+
+state 117
+	while : RES_WHILE PAR_AB expresion . PAR_CE LLA_AB sentencias LLA_CE  (29)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : PAR_AB expresion . PAR_CE  (67)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	PAR_CE  shift 150
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	.  error
+
+
+state 118
 	while : RES_WHILE expresion LLA_AB . sentencias LLA_CE  (30)
 
 	CTE_ENTERA  shift 53
@@ -1798,31 +1936,33 @@ state 114
 	tiposimple  goto 20
 	while  goto 68
 	expresion  goto 69
-	sentencias  goto 143
+	sentencias  goto 151
 	if  goto 71
 	sentencia  goto 72
 
 
-state 115
+state 119
 	if : RES_IF PAR_AB expresion . PAR_CE LLA_AB sentencias LLA_CE else  (31)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : PAR_AB expresion . PAR_CE  (65)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : PAR_AB expresion . PAR_CE  (67)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
-	PAR_CE  shift 144
+	PAR_CE  shift 152
 	COR_AB  shift 88
 	OP_MAS  shift 89
 	OP_MENOS  shift 90
@@ -1838,10 +1978,12 @@ state 115
 	BOOL_AND  shift 101
 	BOOL_OR  shift 102
 	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
 	.  error
 
 
-state 116
+state 120
 	if : RES_IF expresion LLA_AB . sentencias LLA_CE else  (32)
 
 	CTE_ENTERA  shift 53
@@ -1867,201 +2009,129 @@ state 116
 	tiposimple  goto 20
 	while  goto 68
 	expresion  goto 69
-	sentencias  goto 145
+	sentencias  goto 153
 	if  goto 71
 	sentencia  goto 72
 
 
-state 117
+state 121
 	sentencia : RES_RET expresion SIM_PC .  (43)
 
 	.  reduce 43
 
 
-state 118
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : tipo PAR_AB expresion . PAR_CE  (72)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	PAR_CE  shift 146
-	COR_AB  shift 88
-	OP_MAS  shift 89
-	OP_MENOS  shift 90
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_COMIG  shift 94
-	SIM_DIST  shift 95
-	SIM_MAIG  shift 96
-	SIM_MEIG  shift 97
-	SIM_MA  shift 99
-	SIM_ME  shift 100
-	BOOL_AND  shift 101
-	BOOL_OR  shift 102
-	SIM_PTO  shift 103
-	.  error
-
-
-state 119
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion COR_AB expresion . COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	COR_AB  shift 88
-	COR_CE  shift 147
-	OP_MAS  shift 89
-	OP_MENOS  shift 90
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_COMIG  shift 94
-	SIM_DIST  shift 95
-	SIM_MAIG  shift 96
-	SIM_MEIG  shift 97
-	SIM_MA  shift 99
-	SIM_ME  shift 100
-	BOOL_AND  shift 101
-	BOOL_OR  shift 102
-	SIM_PTO  shift 103
-	.  error
-
-
-state 120
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion OP_MAS expresion .  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	COR_AB  shift 88
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_PTO  shift 103
-	LLA_AB  reduce 50
-	PAR_CE  reduce 50
-	COR_CE  reduce 50
-	OP_MAS  reduce 50
-	OP_MENOS  reduce 50
-	SIM_COMIG  reduce 50
-	SIM_DIST  reduce 50
-	SIM_MAIG  reduce 50
-	SIM_MEIG  reduce 50
-	SIM_IG  reduce 50
-	SIM_CO  reduce 50
-	SIM_MA  reduce 50
-	SIM_PC  reduce 50
-	SIM_ME  reduce 50
-	BOOL_AND  reduce 50
-	BOOL_OR  reduce 50
-
-
-state 121
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion OP_MENOS expresion .  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
-
-	COR_AB  shift 88
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_PTO  shift 103
-	LLA_AB  reduce 51
-	PAR_CE  reduce 51
-	COR_CE  reduce 51
-	OP_MAS  reduce 51
-	OP_MENOS  reduce 51
-	SIM_COMIG  reduce 51
-	SIM_DIST  reduce 51
-	SIM_MAIG  reduce 51
-	SIM_MEIG  reduce 51
-	SIM_IG  reduce 51
-	SIM_CO  reduce 51
-	SIM_MA  reduce 51
-	SIM_PC  reduce 51
-	SIM_ME  reduce 51
-	BOOL_AND  reduce 51
-	BOOL_OR  reduce 51
-
-
 state 122
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion OP_MUL expresion .  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : tipo PAR_AB expresion . PAR_CE  (74)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	PAR_CE  shift 154
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	.  error
+
+
+state 123
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion COR_AB expresion . COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
+	COR_CE  shift 155
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	.  error
+
+
+state 124
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion OP_MAS expresion .  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
 	SIM_PTO  shift 103
 	LLA_AB  reduce 52
 	PAR_CE  reduce 52
 	COR_CE  reduce 52
 	OP_MAS  reduce 52
 	OP_MENOS  reduce 52
-	OP_MUL  reduce 52
-	OP_DIV  reduce 52
-	OP_MOD  reduce 52
 	SIM_COMIG  reduce 52
 	SIM_DIST  reduce 52
 	SIM_MAIG  reduce 52
@@ -2073,36 +2143,40 @@ state 122
 	SIM_ME  reduce 52
 	BOOL_AND  reduce 52
 	BOOL_OR  reduce 52
+	SEN_AND  reduce 52
+	SEN_OR  reduce 52
 
 
-state 123
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion OP_DIV expresion .  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 125
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion OP_MENOS expresion .  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
 	SIM_PTO  shift 103
 	LLA_AB  reduce 53
 	PAR_CE  reduce 53
 	COR_CE  reduce 53
 	OP_MAS  reduce 53
 	OP_MENOS  reduce 53
-	OP_MUL  reduce 53
-	OP_DIV  reduce 53
-	OP_MOD  reduce 53
 	SIM_COMIG  reduce 53
 	SIM_DIST  reduce 53
 	SIM_MAIG  reduce 53
@@ -2114,25 +2188,29 @@ state 123
 	SIM_ME  reduce 53
 	BOOL_AND  reduce 53
 	BOOL_OR  reduce 53
+	SEN_AND  reduce 53
+	SEN_OR  reduce 53
 
 
-state 124
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion OP_MOD expresion .  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 126
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion OP_MUL expresion .  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	SIM_PTO  shift 103
@@ -2155,25 +2233,119 @@ state 124
 	SIM_ME  reduce 54
 	BOOL_AND  reduce 54
 	BOOL_OR  reduce 54
+	SEN_AND  reduce 54
+	SEN_OR  reduce 54
 
 
-state 125
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion SIM_COMIG expresion .  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 127
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion OP_DIV expresion .  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	SIM_PTO  shift 103
+	LLA_AB  reduce 55
+	PAR_CE  reduce 55
+	COR_CE  reduce 55
+	OP_MAS  reduce 55
+	OP_MENOS  reduce 55
+	OP_MUL  reduce 55
+	OP_DIV  reduce 55
+	OP_MOD  reduce 55
+	SIM_COMIG  reduce 55
+	SIM_DIST  reduce 55
+	SIM_MAIG  reduce 55
+	SIM_MEIG  reduce 55
+	SIM_IG  reduce 55
+	SIM_CO  reduce 55
+	SIM_MA  reduce 55
+	SIM_PC  reduce 55
+	SIM_ME  reduce 55
+	BOOL_AND  reduce 55
+	BOOL_OR  reduce 55
+	SEN_AND  reduce 55
+	SEN_OR  reduce 55
+
+
+state 128
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion OP_MOD expresion .  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	SIM_PTO  shift 103
+	LLA_AB  reduce 56
+	PAR_CE  reduce 56
+	COR_CE  reduce 56
+	OP_MAS  reduce 56
+	OP_MENOS  reduce 56
+	OP_MUL  reduce 56
+	OP_DIV  reduce 56
+	OP_MOD  reduce 56
+	SIM_COMIG  reduce 56
+	SIM_DIST  reduce 56
+	SIM_MAIG  reduce 56
+	SIM_MEIG  reduce 56
+	SIM_IG  reduce 56
+	SIM_CO  reduce 56
+	SIM_MA  reduce 56
+	SIM_PC  reduce 56
+	SIM_ME  reduce 56
+	BOOL_AND  reduce 56
+	BOOL_OR  reduce 56
+	SEN_AND  reduce 56
+	SEN_OR  reduce 56
+
+
+state 129
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion SIM_COMIG expresion .  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2182,39 +2354,88 @@ state 125
 	OP_DIV  shift 92
 	OP_MOD  shift 93
 	SIM_PTO  shift 103
-	LLA_AB  reduce 63
-	PAR_CE  reduce 63
-	COR_CE  reduce 63
-	SIM_COMIG  reduce 63
-	SIM_DIST  reduce 63
-	SIM_MAIG  reduce 63
-	SIM_MEIG  reduce 63
-	SIM_IG  reduce 63
-	SIM_CO  reduce 63
-	SIM_MA  reduce 63
-	SIM_PC  reduce 63
-	SIM_ME  reduce 63
-	BOOL_AND  reduce 63
-	BOOL_OR  reduce 63
+	LLA_AB  reduce 65
+	PAR_CE  reduce 65
+	COR_CE  reduce 65
+	SIM_COMIG  reduce 65
+	SIM_DIST  reduce 65
+	SIM_MAIG  reduce 65
+	SIM_MEIG  reduce 65
+	SIM_IG  reduce 65
+	SIM_CO  reduce 65
+	SIM_MA  reduce 65
+	SIM_PC  reduce 65
+	SIM_ME  reduce 65
+	BOOL_AND  reduce 65
+	BOOL_OR  reduce 65
+	SEN_AND  reduce 65
+	SEN_OR  reduce 65
 
 
-state 126
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion SIM_DIST expresion .  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 130
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion SIM_DIST expresion .  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_PTO  shift 103
+	LLA_AB  reduce 64
+	PAR_CE  reduce 64
+	COR_CE  reduce 64
+	SIM_COMIG  reduce 64
+	SIM_DIST  reduce 64
+	SIM_MAIG  reduce 64
+	SIM_MEIG  reduce 64
+	SIM_IG  reduce 64
+	SIM_CO  reduce 64
+	SIM_MA  reduce 64
+	SIM_PC  reduce 64
+	SIM_ME  reduce 64
+	BOOL_AND  reduce 64
+	BOOL_OR  reduce 64
+	SEN_AND  reduce 64
+	SEN_OR  reduce 64
+
+
+state 131
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion SIM_MAIG expresion .  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2237,25 +2458,115 @@ state 126
 	SIM_ME  reduce 62
 	BOOL_AND  reduce 62
 	BOOL_OR  reduce 62
+	SEN_AND  reduce 62
+	SEN_OR  reduce 62
 
 
-state 127
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion SIM_MAIG expresion .  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 132
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion SIM_MEIG expresion .  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_PTO  shift 103
+	LLA_AB  reduce 63
+	PAR_CE  reduce 63
+	COR_CE  reduce 63
+	SIM_COMIG  reduce 63
+	SIM_DIST  reduce 63
+	SIM_MAIG  reduce 63
+	SIM_MEIG  reduce 63
+	SIM_IG  reduce 63
+	SIM_CO  reduce 63
+	SIM_MA  reduce 63
+	SIM_PC  reduce 63
+	SIM_ME  reduce 63
+	BOOL_AND  reduce 63
+	BOOL_OR  reduce 63
+	SEN_AND  reduce 63
+	SEN_OR  reduce 63
+
+
+state 133
+	sentencia : expresion SIM_IG expresion . SIM_PC  (42)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_PC  shift 156
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	.  error
+
+
+state 134
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion SIM_MA expresion .  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2278,25 +2589,29 @@ state 127
 	SIM_ME  reduce 60
 	BOOL_AND  reduce 60
 	BOOL_OR  reduce 60
+	SEN_AND  reduce 60
+	SEN_OR  reduce 60
 
 
-state 128
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion SIM_MEIG expresion .  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 135
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion SIM_ME expresion .  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2319,25 +2634,29 @@ state 128
 	SIM_ME  reduce 61
 	BOOL_AND  reduce 61
 	BOOL_OR  reduce 61
+	SEN_AND  reduce 61
+	SEN_OR  reduce 61
 
 
-state 129
-	sentencia : expresion SIM_IG expresion . SIM_PC  (42)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 136
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion BOOL_AND expresion .  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2350,31 +2669,39 @@ state 129
 	SIM_MAIG  shift 96
 	SIM_MEIG  shift 97
 	SIM_MA  shift 99
-	SIM_PC  shift 148
 	SIM_ME  shift 100
-	BOOL_AND  shift 101
-	BOOL_OR  shift 102
 	SIM_PTO  shift 103
-	.  error
+	LLA_AB  reduce 57
+	PAR_CE  reduce 57
+	COR_CE  reduce 57
+	SIM_IG  reduce 57
+	SIM_CO  reduce 57
+	SIM_PC  reduce 57
+	BOOL_AND  reduce 57
+	BOOL_OR  reduce 57
+	SEN_AND  reduce 57
+	SEN_OR  reduce 57
 
 
-state 130
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion SIM_MA expresion .  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 137
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion BOOL_OR expresion .  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2382,81 +2709,51 @@ state 130
 	OP_MUL  shift 91
 	OP_DIV  shift 92
 	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
 	SIM_PTO  shift 103
 	LLA_AB  reduce 58
 	PAR_CE  reduce 58
 	COR_CE  reduce 58
-	SIM_COMIG  reduce 58
-	SIM_DIST  reduce 58
-	SIM_MAIG  reduce 58
-	SIM_MEIG  reduce 58
 	SIM_IG  reduce 58
 	SIM_CO  reduce 58
-	SIM_MA  reduce 58
 	SIM_PC  reduce 58
-	SIM_ME  reduce 58
 	BOOL_AND  reduce 58
 	BOOL_OR  reduce 58
+	SEN_AND  reduce 58
+	SEN_OR  reduce 58
 
 
-state 131
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion SIM_ME expresion .  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 138
+	expresion : expresion SIM_PTO IDENT .  (76)
 
-	COR_AB  shift 88
-	OP_MAS  shift 89
-	OP_MENOS  shift 90
-	OP_MUL  shift 91
-	OP_DIV  shift 92
-	OP_MOD  shift 93
-	SIM_PTO  shift 103
-	LLA_AB  reduce 59
-	PAR_CE  reduce 59
-	COR_CE  reduce 59
-	SIM_COMIG  reduce 59
-	SIM_DIST  reduce 59
-	SIM_MAIG  reduce 59
-	SIM_MEIG  reduce 59
-	SIM_IG  reduce 59
-	SIM_CO  reduce 59
-	SIM_MA  reduce 59
-	SIM_PC  reduce 59
-	SIM_ME  reduce 59
-	BOOL_AND  reduce 59
-	BOOL_OR  reduce 59
+	.  reduce 76
 
 
-state 132
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion BOOL_AND expresion .  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 139
+	sentencia : expresion SEN_AND expresion . SIM_PC  (48)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion SEN_AND expresion .  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2469,35 +2766,36 @@ state 132
 	SIM_MAIG  shift 96
 	SIM_MEIG  shift 97
 	SIM_MA  shift 99
+	SIM_PC  shift 157
 	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
 	SIM_PTO  shift 103
-	LLA_AB  reduce 55
-	PAR_CE  reduce 55
-	COR_CE  reduce 55
-	SIM_IG  reduce 55
-	SIM_CO  reduce 55
-	SIM_PC  reduce 55
-	BOOL_AND  reduce 55
-	BOOL_OR  reduce 55
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	SIM_IG  reduce 77
 
 
-state 133
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion BOOL_OR expresion .  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 140
+	sentencia : expresion SEN_OR expresion . SIM_PC  (49)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+	expresion : expresion SEN_OR expresion .  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2510,70 +2808,154 @@ state 133
 	SIM_MAIG  shift 96
 	SIM_MEIG  shift 97
 	SIM_MA  shift 99
+	SIM_PC  shift 158
 	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
 	SIM_PTO  shift 103
-	LLA_AB  reduce 56
-	PAR_CE  reduce 56
-	COR_CE  reduce 56
-	SIM_IG  reduce 56
-	SIM_CO  reduce 56
-	SIM_PC  reduce 56
-	BOOL_AND  reduce 56
-	BOOL_OR  reduce 56
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	SIM_IG  reduce 78
 
 
-state 134
-	expresion : expresion SIM_PTO IDENT .  (74)
+state 141
+	expresion : IDENT PAR_AB PAR_CE .  (73)
 
-	.  reduce 74
-
-
-state 135
-	expresion : IDENT PAR_AB PAR_CE .  (71)
-
-	.  reduce 71
+	.  reduce 73
 
 
-state 136
-	expresiones : expresiones . SIM_CO expresion  (48)
-	expresion : IDENT PAR_AB expresiones . PAR_CE  (70)
+state 142
+	expresiones : expresiones . SIM_CO expresion  (50)
+	expresion : IDENT PAR_AB expresiones . PAR_CE  (72)
 
-	PAR_CE  shift 149
-	SIM_CO  shift 139
+	PAR_CE  shift 159
+	SIM_CO  shift 147
 	.  error
 
 
-state 137
+state 143
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion SEN_AND expresion .  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	LLA_AB  reduce 77
+	PAR_CE  reduce 77
+	COR_CE  reduce 77
+	SIM_IG  reduce 77
+	SIM_CO  reduce 77
+	SIM_PC  reduce 77
+
+
+state 144
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
+	expresion : expresion SEN_OR expresion .  (78)
+
+	COR_AB  shift 88
+	OP_MAS  shift 89
+	OP_MENOS  shift 90
+	OP_MUL  shift 91
+	OP_DIV  shift 92
+	OP_MOD  shift 93
+	SIM_COMIG  shift 94
+	SIM_DIST  shift 95
+	SIM_MAIG  shift 96
+	SIM_MEIG  shift 97
+	SIM_MA  shift 99
+	SIM_ME  shift 100
+	BOOL_AND  shift 101
+	BOOL_OR  shift 102
+	SIM_PTO  shift 103
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	LLA_AB  reduce 78
+	PAR_CE  reduce 78
+	COR_CE  reduce 78
+	SIM_IG  reduce 78
+	SIM_CO  reduce 78
+	SIM_PC  reduce 78
+
+
+state 145
 	sentencia : IDENT PAR_AB PAR_CE SIM_PC .  (46)
 
 	.  reduce 46
 
 
-state 138
+state 146
 	sentencia : IDENT PAR_AB expresiones PAR_CE . SIM_PC  (47)
-	expresion : IDENT PAR_AB expresiones PAR_CE .  (70)
+	expresion : IDENT PAR_AB expresiones PAR_CE .  (72)
 
-	SIM_PC  shift 150
-	COR_AB  reduce 70
-	OP_MAS  reduce 70
-	OP_MENOS  reduce 70
-	OP_MUL  reduce 70
-	OP_DIV  reduce 70
-	OP_MOD  reduce 70
-	SIM_COMIG  reduce 70
-	SIM_DIST  reduce 70
-	SIM_MAIG  reduce 70
-	SIM_MEIG  reduce 70
-	SIM_IG  reduce 70
-	SIM_MA  reduce 70
-	SIM_ME  reduce 70
-	BOOL_AND  reduce 70
-	BOOL_OR  reduce 70
-	SIM_PTO  reduce 70
+	SIM_PC  shift 160
+	COR_AB  reduce 72
+	OP_MAS  reduce 72
+	OP_MENOS  reduce 72
+	OP_MUL  reduce 72
+	OP_DIV  reduce 72
+	OP_MOD  reduce 72
+	SIM_COMIG  reduce 72
+	SIM_DIST  reduce 72
+	SIM_MAIG  reduce 72
+	SIM_MEIG  reduce 72
+	SIM_IG  reduce 72
+	SIM_MA  reduce 72
+	SIM_ME  reduce 72
+	BOOL_AND  reduce 72
+	BOOL_OR  reduce 72
+	SIM_PTO  reduce 72
+	SEN_AND  reduce 72
+	SEN_OR  reduce 72
 
 
-state 139
-	expresiones : expresiones SIM_CO . expresion  (48)
+state 147
+	expresiones : expresiones SIM_CO . expresion  (50)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
@@ -2591,52 +2973,54 @@ state 139
 
 	tipo  goto 66
 	tiposimple  goto 20
-	expresion  goto 151
+	expresion  goto 161
 
 
-state 140
+state 148
 	sentencia : RES_READ PAR_AB expresiones PAR_CE . SIM_PC  (41)
 
-	SIM_PC  shift 152
+	SIM_PC  shift 162
 	.  error
 
 
-state 141
+state 149
 	sentencia : RES_WRITE PAR_AB expresiones PAR_CE . SIM_PC  (40)
 
-	SIM_PC  shift 153
+	SIM_PC  shift 163
 	.  error
 
 
-state 142
+state 150
 	while : RES_WHILE PAR_AB expresion PAR_CE . LLA_AB sentencias LLA_CE  (29)
-	expresion : PAR_AB expresion PAR_CE .  (65)
+	expresion : PAR_AB expresion PAR_CE .  (67)
 
-	LLA_AB  shift 154
-	COR_AB  reduce 65
-	OP_MAS  reduce 65
-	OP_MENOS  reduce 65
-	OP_MUL  reduce 65
-	OP_DIV  reduce 65
-	OP_MOD  reduce 65
-	SIM_COMIG  reduce 65
-	SIM_DIST  reduce 65
-	SIM_MAIG  reduce 65
-	SIM_MEIG  reduce 65
-	SIM_MA  reduce 65
-	SIM_ME  reduce 65
-	BOOL_AND  reduce 65
-	BOOL_OR  reduce 65
-	SIM_PTO  reduce 65
+	LLA_AB  shift 164
+	COR_AB  reduce 67
+	OP_MAS  reduce 67
+	OP_MENOS  reduce 67
+	OP_MUL  reduce 67
+	OP_DIV  reduce 67
+	OP_MOD  reduce 67
+	SIM_COMIG  reduce 67
+	SIM_DIST  reduce 67
+	SIM_MAIG  reduce 67
+	SIM_MEIG  reduce 67
+	SIM_MA  reduce 67
+	SIM_ME  reduce 67
+	BOOL_AND  reduce 67
+	BOOL_OR  reduce 67
+	SIM_PTO  reduce 67
+	SEN_AND  reduce 67
+	SEN_OR  reduce 67
 
 
-state 143
+state 151
 	while : RES_WHILE expresion LLA_AB sentencias . LLA_CE  (30)
 	sentencias : sentencias . sentencia  (38)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
-	LLA_CE  shift 155
+	LLA_CE  shift 165
 	PAR_AB  shift 55
 	COR_AB  shift 13
 	CHAR  shift 56
@@ -2659,38 +3043,40 @@ state 143
 	while  goto 68
 	expresion  goto 69
 	if  goto 71
-	sentencia  goto 104
+	sentencia  goto 106
 
 
-state 144
+state 152
 	if : RES_IF PAR_AB expresion PAR_CE . LLA_AB sentencias LLA_CE else  (31)
-	expresion : PAR_AB expresion PAR_CE .  (65)
+	expresion : PAR_AB expresion PAR_CE .  (67)
 
-	LLA_AB  shift 156
-	COR_AB  reduce 65
-	OP_MAS  reduce 65
-	OP_MENOS  reduce 65
-	OP_MUL  reduce 65
-	OP_DIV  reduce 65
-	OP_MOD  reduce 65
-	SIM_COMIG  reduce 65
-	SIM_DIST  reduce 65
-	SIM_MAIG  reduce 65
-	SIM_MEIG  reduce 65
-	SIM_MA  reduce 65
-	SIM_ME  reduce 65
-	BOOL_AND  reduce 65
-	BOOL_OR  reduce 65
-	SIM_PTO  reduce 65
+	LLA_AB  shift 166
+	COR_AB  reduce 67
+	OP_MAS  reduce 67
+	OP_MENOS  reduce 67
+	OP_MUL  reduce 67
+	OP_DIV  reduce 67
+	OP_MOD  reduce 67
+	SIM_COMIG  reduce 67
+	SIM_DIST  reduce 67
+	SIM_MAIG  reduce 67
+	SIM_MEIG  reduce 67
+	SIM_MA  reduce 67
+	SIM_ME  reduce 67
+	BOOL_AND  reduce 67
+	BOOL_OR  reduce 67
+	SIM_PTO  reduce 67
+	SEN_AND  reduce 67
+	SEN_OR  reduce 67
 
 
-state 145
+state 153
 	if : RES_IF expresion LLA_AB sentencias . LLA_CE else  (32)
 	sentencias : sentencias . sentencia  (38)
 
 	CTE_ENTERA  shift 53
 	CTE_DECIMAL  shift 54
-	LLA_CE  shift 157
+	LLA_CE  shift 167
 	PAR_AB  shift 55
 	COR_AB  shift 13
 	CHAR  shift 56
@@ -2713,56 +3099,70 @@ state 145
 	while  goto 68
 	expresion  goto 69
 	if  goto 71
-	sentencia  goto 104
+	sentencia  goto 106
 
 
-state 146
-	expresion : tipo PAR_AB expresion PAR_CE .  (72)
+state 154
+	expresion : tipo PAR_AB expresion PAR_CE .  (74)
 
-	.  reduce 72
-
-
-state 147
-	expresion : expresion COR_AB expresion COR_CE .  (73)
-
-	.  reduce 73
+	.  reduce 74
 
 
-state 148
+state 155
+	expresion : expresion COR_AB expresion COR_CE .  (75)
+
+	.  reduce 75
+
+
+state 156
 	sentencia : expresion SIM_IG expresion SIM_PC .  (42)
 
 	.  reduce 42
 
 
-state 149
-	expresion : IDENT PAR_AB expresiones PAR_CE .  (70)
+state 157
+	sentencia : expresion SEN_AND expresion SIM_PC .  (48)
 
-	.  reduce 70
+	.  reduce 48
 
 
-state 150
+state 158
+	sentencia : expresion SEN_OR expresion SIM_PC .  (49)
+
+	.  reduce 49
+
+
+state 159
+	expresion : IDENT PAR_AB expresiones PAR_CE .  (72)
+
+	.  reduce 72
+
+
+state 160
 	sentencia : IDENT PAR_AB expresiones PAR_CE SIM_PC .  (47)
 
 	.  reduce 47
 
 
-state 151
-	expresiones : expresiones SIM_CO expresion .  (48)
-	expresion : expresion . OP_MAS expresion  (50)
-	expresion : expresion . OP_MENOS expresion  (51)
-	expresion : expresion . OP_MUL expresion  (52)
-	expresion : expresion . OP_DIV expresion  (53)
-	expresion : expresion . OP_MOD expresion  (54)
-	expresion : expresion . BOOL_AND expresion  (55)
-	expresion : expresion . BOOL_OR expresion  (56)
-	expresion : expresion . SIM_MA expresion  (58)
-	expresion : expresion . SIM_ME expresion  (59)
-	expresion : expresion . SIM_MAIG expresion  (60)
-	expresion : expresion . SIM_MEIG expresion  (61)
-	expresion : expresion . SIM_DIST expresion  (62)
-	expresion : expresion . SIM_COMIG expresion  (63)
-	expresion : expresion . COR_AB expresion COR_CE  (73)
-	expresion : expresion . SIM_PTO IDENT  (74)
+state 161
+	expresiones : expresiones SIM_CO expresion .  (50)
+	expresion : expresion . OP_MAS expresion  (52)
+	expresion : expresion . OP_MENOS expresion  (53)
+	expresion : expresion . OP_MUL expresion  (54)
+	expresion : expresion . OP_DIV expresion  (55)
+	expresion : expresion . OP_MOD expresion  (56)
+	expresion : expresion . BOOL_AND expresion  (57)
+	expresion : expresion . BOOL_OR expresion  (58)
+	expresion : expresion . SIM_MA expresion  (60)
+	expresion : expresion . SIM_ME expresion  (61)
+	expresion : expresion . SIM_MAIG expresion  (62)
+	expresion : expresion . SIM_MEIG expresion  (63)
+	expresion : expresion . SIM_DIST expresion  (64)
+	expresion : expresion . SIM_COMIG expresion  (65)
+	expresion : expresion . COR_AB expresion COR_CE  (75)
+	expresion : expresion . SIM_PTO IDENT  (76)
+	expresion : expresion . SEN_AND expresion  (77)
+	expresion : expresion . SEN_OR expresion  (78)
 
 	COR_AB  shift 88
 	OP_MAS  shift 89
@@ -2779,23 +3179,25 @@ state 151
 	BOOL_AND  shift 101
 	BOOL_OR  shift 102
 	SIM_PTO  shift 103
-	PAR_CE  reduce 48
-	SIM_CO  reduce 48
+	SEN_AND  shift 110
+	SEN_OR  shift 111
+	PAR_CE  reduce 50
+	SIM_CO  reduce 50
 
 
-state 152
+state 162
 	sentencia : RES_READ PAR_AB expresiones PAR_CE SIM_PC .  (41)
 
 	.  reduce 41
 
 
-state 153
+state 163
 	sentencia : RES_WRITE PAR_AB expresiones PAR_CE SIM_PC .  (40)
 
 	.  reduce 40
 
 
-state 154
+state 164
 	while : RES_WHILE PAR_AB expresion PAR_CE LLA_AB . sentencias LLA_CE  (29)
 
 	CTE_ENTERA  shift 53
@@ -2821,18 +3223,18 @@ state 154
 	tiposimple  goto 20
 	while  goto 68
 	expresion  goto 69
-	sentencias  goto 158
+	sentencias  goto 168
 	if  goto 71
 	sentencia  goto 72
 
 
-state 155
+state 165
 	while : RES_WHILE expresion LLA_AB sentencias LLA_CE .  (30)
 
 	.  reduce 30
 
 
-state 156
+state 166
 	if : RES_IF PAR_AB expresion PAR_CE LLA_AB . sentencias LLA_CE else  (31)
 
 	CTE_ENTERA  shift 53
@@ -2858,272 +3260,40 @@ state 156
 	tiposimple  goto 20
 	while  goto 68
 	expresion  goto 69
-	sentencias  goto 159
+	sentencias  goto 169
 	if  goto 71
 	sentencia  goto 72
-
-
-state 157
-	if : RES_IF expresion LLA_AB sentencias LLA_CE . else  (32)
-	else : .  (35)
-
-	RES_ELSE  shift 160
-	CTE_ENTERA  reduce 35
-	CTE_DECIMAL  reduce 35
-	LLA_CE  reduce 35
-	PAR_AB  reduce 35
-	COR_AB  reduce 35
-	CHAR  reduce 35
-	IDENT  reduce 35
-	OP_MENOS  reduce 35
-	BOOL_NOT  reduce 35
-	RES_READ  reduce 35
-	RES_WRITE  reduce 35
-	RES_WHILE  reduce 35
-	RES_IF  reduce 35
-	RES_INT  reduce 35
-	RES_F32  reduce 35
-	RES_CHAR  reduce 35
-	RES_STRUCT  reduce 35
-	RES_RET  reduce 35
-
-	else  goto 161
-
-
-state 158
-	while : RES_WHILE PAR_AB expresion PAR_CE LLA_AB sentencias . LLA_CE  (29)
-	sentencias : sentencias . sentencia  (38)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	LLA_CE  shift 162
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 57
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_READ  shift 60
-	RES_WRITE  shift 61
-	RES_WHILE  shift 62
-	RES_IF  shift 63
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	RES_RET  shift 64
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	while  goto 68
-	expresion  goto 69
-	if  goto 71
-	sentencia  goto 104
-
-
-state 159
-	if : RES_IF PAR_AB expresion PAR_CE LLA_AB sentencias . LLA_CE else  (31)
-	sentencias : sentencias . sentencia  (38)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	LLA_CE  shift 163
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 57
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_READ  shift 60
-	RES_WRITE  shift 61
-	RES_WHILE  shift 62
-	RES_IF  shift 63
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	RES_RET  shift 64
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	while  goto 68
-	expresion  goto 69
-	if  goto 71
-	sentencia  goto 104
-
-
-state 160
-	else : RES_ELSE . LLA_AB sentencias LLA_CE  (33)
-	else : RES_ELSE . PAR_AB PAR_CE LLA_AB sentencias LLA_CE  (34)
-
-	LLA_AB  shift 164
-	PAR_AB  shift 165
-	.  error
-
-
-state 161
-	if : RES_IF expresion LLA_AB sentencias LLA_CE else .  (32)
-
-	.  reduce 32
-
-
-state 162
-	while : RES_WHILE PAR_AB expresion PAR_CE LLA_AB sentencias LLA_CE .  (29)
-
-	.  reduce 29
-
-
-state 163
-	if : RES_IF PAR_AB expresion PAR_CE LLA_AB sentencias LLA_CE . else  (31)
-	else : .  (35)
-
-	RES_ELSE  shift 160
-	CTE_ENTERA  reduce 35
-	CTE_DECIMAL  reduce 35
-	LLA_CE  reduce 35
-	PAR_AB  reduce 35
-	COR_AB  reduce 35
-	CHAR  reduce 35
-	IDENT  reduce 35
-	OP_MENOS  reduce 35
-	BOOL_NOT  reduce 35
-	RES_READ  reduce 35
-	RES_WRITE  reduce 35
-	RES_WHILE  reduce 35
-	RES_IF  reduce 35
-	RES_INT  reduce 35
-	RES_F32  reduce 35
-	RES_CHAR  reduce 35
-	RES_STRUCT  reduce 35
-	RES_RET  reduce 35
-
-	else  goto 166
-
-
-state 164
-	else : RES_ELSE LLA_AB . sentencias LLA_CE  (33)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 57
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_READ  shift 60
-	RES_WRITE  shift 61
-	RES_WHILE  shift 62
-	RES_IF  shift 63
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	RES_RET  shift 64
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	while  goto 68
-	expresion  goto 69
-	sentencias  goto 167
-	if  goto 71
-	sentencia  goto 72
-
-
-state 165
-	else : RES_ELSE PAR_AB . PAR_CE LLA_AB sentencias LLA_CE  (34)
-
-	PAR_CE  shift 168
-	.  error
-
-
-state 166
-	if : RES_IF PAR_AB expresion PAR_CE LLA_AB sentencias LLA_CE else .  (31)
-
-	.  reduce 31
 
 
 state 167
-	else : RES_ELSE LLA_AB sentencias . LLA_CE  (33)
-	sentencias : sentencias . sentencia  (38)
+	if : RES_IF expresion LLA_AB sentencias LLA_CE . else  (32)
+	else : .  (35)
 
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	LLA_CE  shift 169
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 57
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_READ  shift 60
-	RES_WRITE  shift 61
-	RES_WHILE  shift 62
-	RES_IF  shift 63
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	RES_RET  shift 64
-	.  error
+	RES_ELSE  shift 170
+	CTE_ENTERA  reduce 35
+	CTE_DECIMAL  reduce 35
+	LLA_CE  reduce 35
+	PAR_AB  reduce 35
+	COR_AB  reduce 35
+	CHAR  reduce 35
+	IDENT  reduce 35
+	OP_MENOS  reduce 35
+	BOOL_NOT  reduce 35
+	RES_READ  reduce 35
+	RES_WRITE  reduce 35
+	RES_WHILE  reduce 35
+	RES_IF  reduce 35
+	RES_INT  reduce 35
+	RES_F32  reduce 35
+	RES_CHAR  reduce 35
+	RES_STRUCT  reduce 35
+	RES_RET  reduce 35
 
-	tipo  goto 66
-	tiposimple  goto 20
-	while  goto 68
-	expresion  goto 69
-	if  goto 71
-	sentencia  goto 104
+	else  goto 171
 
 
 state 168
-	else : RES_ELSE PAR_AB PAR_CE . LLA_AB sentencias LLA_CE  (34)
-
-	LLA_AB  shift 170
-	.  error
-
-
-state 169
-	else : RES_ELSE LLA_AB sentencias LLA_CE .  (33)
-
-	.  reduce 33
-
-
-state 170
-	else : RES_ELSE PAR_AB PAR_CE LLA_AB . sentencias LLA_CE  (34)
-
-	CTE_ENTERA  shift 53
-	CTE_DECIMAL  shift 54
-	PAR_AB  shift 55
-	COR_AB  shift 13
-	CHAR  shift 56
-	IDENT  shift 57
-	OP_MENOS  shift 58
-	BOOL_NOT  shift 59
-	RES_READ  shift 60
-	RES_WRITE  shift 61
-	RES_WHILE  shift 62
-	RES_IF  shift 63
-	RES_INT  shift 15
-	RES_F32  shift 16
-	RES_CHAR  shift 17
-	RES_STRUCT  shift 18
-	RES_RET  shift 64
-	.  error
-
-	tipo  goto 66
-	tiposimple  goto 20
-	while  goto 68
-	expresion  goto 69
-	sentencias  goto 171
-	if  goto 71
-	sentencia  goto 72
-
-
-state 171
-	else : RES_ELSE PAR_AB PAR_CE LLA_AB sentencias . LLA_CE  (34)
+	while : RES_WHILE PAR_AB expresion PAR_CE LLA_AB sentencias . LLA_CE  (29)
 	sentencias : sentencias . sentencia  (38)
 
 	CTE_ENTERA  shift 53
@@ -3151,14 +3321,246 @@ state 171
 	while  goto 68
 	expresion  goto 69
 	if  goto 71
-	sentencia  goto 104
+	sentencia  goto 106
+
+
+state 169
+	if : RES_IF PAR_AB expresion PAR_CE LLA_AB sentencias . LLA_CE else  (31)
+	sentencias : sentencias . sentencia  (38)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	LLA_CE  shift 173
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 57
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_READ  shift 60
+	RES_WRITE  shift 61
+	RES_WHILE  shift 62
+	RES_IF  shift 63
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	RES_RET  shift 64
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	while  goto 68
+	expresion  goto 69
+	if  goto 71
+	sentencia  goto 106
+
+
+state 170
+	else : RES_ELSE . LLA_AB sentencias LLA_CE  (33)
+	else : RES_ELSE . PAR_AB PAR_CE LLA_AB sentencias LLA_CE  (34)
+
+	LLA_AB  shift 174
+	PAR_AB  shift 175
+	.  error
+
+
+state 171
+	if : RES_IF expresion LLA_AB sentencias LLA_CE else .  (32)
+
+	.  reduce 32
 
 
 state 172
+	while : RES_WHILE PAR_AB expresion PAR_CE LLA_AB sentencias LLA_CE .  (29)
+
+	.  reduce 29
+
+
+state 173
+	if : RES_IF PAR_AB expresion PAR_CE LLA_AB sentencias LLA_CE . else  (31)
+	else : .  (35)
+
+	RES_ELSE  shift 170
+	CTE_ENTERA  reduce 35
+	CTE_DECIMAL  reduce 35
+	LLA_CE  reduce 35
+	PAR_AB  reduce 35
+	COR_AB  reduce 35
+	CHAR  reduce 35
+	IDENT  reduce 35
+	OP_MENOS  reduce 35
+	BOOL_NOT  reduce 35
+	RES_READ  reduce 35
+	RES_WRITE  reduce 35
+	RES_WHILE  reduce 35
+	RES_IF  reduce 35
+	RES_INT  reduce 35
+	RES_F32  reduce 35
+	RES_CHAR  reduce 35
+	RES_STRUCT  reduce 35
+	RES_RET  reduce 35
+
+	else  goto 176
+
+
+state 174
+	else : RES_ELSE LLA_AB . sentencias LLA_CE  (33)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 57
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_READ  shift 60
+	RES_WRITE  shift 61
+	RES_WHILE  shift 62
+	RES_IF  shift 63
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	RES_RET  shift 64
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	while  goto 68
+	expresion  goto 69
+	sentencias  goto 177
+	if  goto 71
+	sentencia  goto 72
+
+
+state 175
+	else : RES_ELSE PAR_AB . PAR_CE LLA_AB sentencias LLA_CE  (34)
+
+	PAR_CE  shift 178
+	.  error
+
+
+state 176
+	if : RES_IF PAR_AB expresion PAR_CE LLA_AB sentencias LLA_CE else .  (31)
+
+	.  reduce 31
+
+
+state 177
+	else : RES_ELSE LLA_AB sentencias . LLA_CE  (33)
+	sentencias : sentencias . sentencia  (38)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	LLA_CE  shift 179
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 57
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_READ  shift 60
+	RES_WRITE  shift 61
+	RES_WHILE  shift 62
+	RES_IF  shift 63
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	RES_RET  shift 64
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	while  goto 68
+	expresion  goto 69
+	if  goto 71
+	sentencia  goto 106
+
+
+state 178
+	else : RES_ELSE PAR_AB PAR_CE . LLA_AB sentencias LLA_CE  (34)
+
+	LLA_AB  shift 180
+	.  error
+
+
+state 179
+	else : RES_ELSE LLA_AB sentencias LLA_CE .  (33)
+
+	.  reduce 33
+
+
+state 180
+	else : RES_ELSE PAR_AB PAR_CE LLA_AB . sentencias LLA_CE  (34)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 57
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_READ  shift 60
+	RES_WRITE  shift 61
+	RES_WHILE  shift 62
+	RES_IF  shift 63
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	RES_RET  shift 64
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	while  goto 68
+	expresion  goto 69
+	sentencias  goto 181
+	if  goto 71
+	sentencia  goto 72
+
+
+state 181
+	else : RES_ELSE PAR_AB PAR_CE LLA_AB sentencias . LLA_CE  (34)
+	sentencias : sentencias . sentencia  (38)
+
+	CTE_ENTERA  shift 53
+	CTE_DECIMAL  shift 54
+	LLA_CE  shift 182
+	PAR_AB  shift 55
+	COR_AB  shift 13
+	CHAR  shift 56
+	IDENT  shift 57
+	OP_MENOS  shift 58
+	BOOL_NOT  shift 59
+	RES_READ  shift 60
+	RES_WRITE  shift 61
+	RES_WHILE  shift 62
+	RES_IF  shift 63
+	RES_INT  shift 15
+	RES_F32  shift 16
+	RES_CHAR  shift 17
+	RES_STRUCT  shift 18
+	RES_RET  shift 64
+	.  error
+
+	tipo  goto 66
+	tiposimple  goto 20
+	while  goto 68
+	expresion  goto 69
+	if  goto 71
+	sentencia  goto 106
+
+
+state 182
 	else : RES_ELSE PAR_AB PAR_CE LLA_AB sentencias LLA_CE .  (34)
 
 	.  reduce 34
 
 
-45 terminals, 25 nonterminals
-75 grammar rules, 173 states
+47 terminals, 25 nonterminals
+79 grammar rules, 183 states

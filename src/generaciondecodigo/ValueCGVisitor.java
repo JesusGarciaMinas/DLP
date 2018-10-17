@@ -147,7 +147,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 		try {
 			cg.push(0);
 			cg.convert(TipoEntero.getInstancia(), u.getTipoExpresion());
-			u.getTipoExpresion().accept(this, param);
+			u.getOperando().accept(this, param);
 			cg.sub(u.getTipoExpresion().suffix());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -190,6 +190,18 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+	
+	@Override
+	public Object visit(ExpresionExamen e, Object param) {
+		e.getExpLeft().accept(this, param);
+		e.getExpRight().accept(this, param);
+		try {
+			cg.examen(e.getOperador());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		return null;
 	}
 }

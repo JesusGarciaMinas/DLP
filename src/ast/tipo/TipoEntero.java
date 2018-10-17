@@ -96,4 +96,11 @@ public class TipoEntero extends AbstractTipo {
 			return tipo;
 		return this;
 	}
+	
+	@Override
+	public Tipo sentenciasExamen(Tipo tipo) {
+		if (tipo instanceof TipoEntero)
+			return tipo;
+		return null;
+	}
 }

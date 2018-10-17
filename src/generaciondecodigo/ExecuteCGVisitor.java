@@ -252,4 +252,18 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 		}
 		return null;
 	}
+	
+	@Override
+	public Object visit(SentenciaBinaria b, Object param) {
+		b.getExpLeft().accept(acg, param);
+		b.getExpLeft().accept(vcg, param);
+		b.getExpRight().accept(vcg, param);
+		try {
+			cg.examen(b.getOperador());
+			cg.store(b.getExpLeft().getTipoExpresion().suffix());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

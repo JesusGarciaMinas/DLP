@@ -8,6 +8,7 @@ import ast.expresion.AccesoCampo;
 import ast.expresion.Aritmetica;
 import ast.expresion.Cast;
 import ast.expresion.Comparacion;
+import ast.expresion.ExpresionExamen;
 import ast.expresion.InvocacionFuncion;
 import ast.expresion.LiteralChar;
 import ast.expresion.LiteralDecimal;
@@ -22,6 +23,7 @@ import ast.sentencia.Lectura;
 import ast.sentencia.SentIf;
 import ast.sentencia.SentReturn;
 import ast.sentencia.SentWhile;
+import ast.sentencia.SentenciaBinaria;
 import ast.tipo.Campo;
 import ast.tipo.TipoArray;
 import ast.tipo.TipoChar;
@@ -217,5 +219,15 @@ public class AbstractCGVisitor implements Visitor {
 	public Object visit(Programa p, Object param) {
 		throw new IllegalStateException("La generación de código no se ha realizado de forma correcta");
 
+	}
+
+	@Override
+	public Object visit(SentenciaBinaria b, Object param) {
+		throw new IllegalStateException("La generación de código no se ha realizado de forma correcta");
+	}
+
+	@Override
+	public Object visit(ExpresionExamen e, Object param) {
+		throw new IllegalStateException("La generación de código no se ha realizado de forma correcta");
 	}
 }

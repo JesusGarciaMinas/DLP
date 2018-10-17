@@ -10,7 +10,7 @@ public class DefVariable extends AbstractNodoAST implements Definicion, Sentenci
 	private String nombre;
 	private Tipo tipo;
 	private int ambito;
-	private int offset; //lo mismo para campos
+	private int offset;
 
 	public DefVariable(int linea, int columna, String nombre, Tipo tipo) {
 		super(linea, columna);
